@@ -36,37 +36,28 @@ if(selected_button == -1)
 	return; 
 }
 
-if(selected_button >= 2)
+if(selected_button < mode_count)
 {
-	if(selected_button != 5)
-	{
-		fading = true;
-		fade_dir = 1;
-		target_phase = selected_button - 2;
-	}
-	else
-	{
-		current_phase = 3;
-		video_last_position = -100;
-		event_user(3);
-	}
-}
-else
-{
-	if(selected_button == 0)
-{
-	target_mode = 0;
-}
-else
-{
-	target_mode = 1;
-}
+    target_mode = selected_button;
 
-fading = true;
-fade_dir = 1;
-target_phase = 0;
-	
-	fading = true;
-	fade_dir = 1;
-	target_phase = 0;
+    fading = true;
+    fade_dir = 1;
+    target_phase = 0;
+}
+else
+{
+    var phase_button = selected_button - mode_count;
+
+    if(phase_button < 3)
+    {
+        fading = true;
+        fade_dir = 1;
+        target_phase = phase_button;
+    }
+    else
+    {
+        current_phase = 3;
+        video_last_position = -100;
+        event_user(3);
+    }
 }

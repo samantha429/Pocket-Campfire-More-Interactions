@@ -19,12 +19,12 @@ for(var _i = 0; _i < button_count; _i++)
 {
 	var _sprite = selected_button == _i ? button_selected : button;
 	var _button_y = button_y + _i * button_trueheight + button_margin_y;
-	if(_i >= 2) _button_y += button_modebutton_gap;	// Add the mode gap offset for buttons after them
+	if(_i >= mode_count) _button_y += button_modebutton_gap;	// Add the mode gap offset for buttons after them
 	
 	var _sprite_index = _i;
 	if((_i == 1 && gender == GENDERS.M) || _i > 1) _sprite_index++;		// Jump one sprite index for vaginal / anal button switch
 	
-	if(_i == 5 && pleasure < 100) 
+	if(_i == button_count - 1 && pleasure < 100) 
 	{ 
 		draw_sprite_ext(button, _sprite_index, button_x, _button_y, 1, 1, 0, c_white, 0.6);
 	}

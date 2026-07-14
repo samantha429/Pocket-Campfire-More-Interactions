@@ -67,11 +67,19 @@ selected_menubutton = -1;
 
 for(var _k = 0; _k < button_count; _k++)
 {
-	if(_k == 5 && pleasure < 100) { break; }	// Don't allow selection of the cum button if below 100 pleasure
+	var _finish_button = button_count - 1;
+
+if(_k == _finish_button && pleasure < 100)
+{
+	break;
+}	// Don't allow selection of the cum button if below 100 pleasure
 	
 	var _button_x1 = button_x - button_width;
 	var _button_y1 = button_y + _k * button_trueheight + button_margin_y;
-	if(_k >= 2) _button_y1 += button_modebutton_gap;	// Add the mode gap offset for buttons after them
+	if(_k >= mode_count)
+{
+	_button_y1 += button_modebutton_gap;
+}	// Add the mode gap offset for buttons after them
 	var _button_x2 = button_x;
 	var _button_y2 = _button_y1 + button_height;
 	
