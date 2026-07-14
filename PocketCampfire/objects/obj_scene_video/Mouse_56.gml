@@ -53,8 +53,18 @@ if(selected_button >= 2)
 }
 else
 {
-	if(selected_button == 0) { target_mode = SCENE_MODE.ORAL; }
-	else { target_mode = SCENE_MODE.SEX; }
+	if(selected_button == 0)
+{
+	target_mode = 0;
+}
+else
+{
+	target_mode = 1;
+}
+
+fading = true;
+fade_dir = 1;
+target_phase = 0;
 	
 	fading = true;
 	fade_dir = 1;

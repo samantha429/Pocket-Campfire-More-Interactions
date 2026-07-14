@@ -2,7 +2,11 @@
 
 if(!video_open_pending || video_get_status() == video_status_closed)
 {
-	video = mode == SCENE_MODE.ORAL ? video_open(oral_clips[current_phase]) : video_open(sex_clips[current_phase]);
+	var _mode = scene_modes[mode];
+
+video = video_open(
+    _mode.clips[current_phase]
+);
 	video_close_pending = false;
 	video_open_pending = true;
 }
