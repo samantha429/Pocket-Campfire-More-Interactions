@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "scr_fade_scene",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "_Core",
-    "path": "folders/Scripts/_Core.yy",
+  "$GMScript":"v1",
+  "%Name":"scr_fade_scene",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_fade_scene",
+  "parent":{
+    "name":"_Core",
+    "path":"folders/Scripts/_Core.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

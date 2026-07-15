@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "scr_goto_camp",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Option Actions",
-    "path": "folders/Scripts/Option Actions.yy",
+  "$GMScript":"v1",
+  "%Name":"scr_goto_camp",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_goto_camp",
+  "parent":{
+    "name":"Option Actions",
+    "path":"folders/Scripts/Option Actions.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

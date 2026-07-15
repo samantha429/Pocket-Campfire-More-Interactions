@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "scr_quit_game",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "_Core",
-    "path": "folders/Scripts/_Core.yy",
+  "$GMScript":"v1",
+  "%Name":"scr_quit_game",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_quit_game",
+  "parent":{
+    "name":"_Core",
+    "path":"folders/Scripts/_Core.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

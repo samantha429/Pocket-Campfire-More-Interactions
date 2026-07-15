@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "scr_camp_mon_move",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Camp",
-    "path": "folders/Scripts/Camp.yy",
+  "$GMScript":"v1",
+  "%Name":"scr_camp_mon_move",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_camp_mon_move",
+  "parent":{
+    "name":"Camp",
+    "path":"folders/Scripts/Camp.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

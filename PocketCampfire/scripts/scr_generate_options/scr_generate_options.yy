@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "scr_generate_options",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Textbox",
-    "path": "folders/Scripts/Textbox.yy",
+  "$GMScript":"v1",
+  "%Name":"scr_generate_options",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_generate_options",
+  "parent":{
+    "name":"Textbox",
+    "path":"folders/Scripts/Textbox.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
