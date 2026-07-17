@@ -39,19 +39,6 @@ scene_modes = [];
 oral_clips = array_create(5);
 sex_clips = array_create(5);
 
-var test_clips = array_create(5);
-
-for(var i = 0; i < 5; i++)
-{
-	test_clips[i] = oral_clips[i];
-}
-
-scene_modes[2] = SceneMode(
-	"Test",
-	0,
-	test_clips
-);
-
 for(var _i = 0; _i < 5; _i++)
 {
 	// Oral clips
@@ -104,6 +91,19 @@ for(var _i = 0; _i < 5; _i++)
 		sex_clips[_i] = "INVALID";
 	}
 }
+
+var test_clips = array_create(5);
+
+for(var i = 0; i < 5; i++)
+{
+	test_clips[i] = oral_clips[i];
+}
+
+scene_modes[2] = SceneMode(
+	"Test",
+	0,
+	test_clips
+);
 
 // Register built-in modes
 scene_modes[0] = SceneMode(
