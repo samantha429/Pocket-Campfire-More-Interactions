@@ -1,10 +1,10 @@
 /// Create Event
 
-function SceneMode(_name, _icon, _clips)
+function SceneMode(_name, _icon_sprite, _clips)
 {
 	return {
 		name : _name,
-		icon : _icon,
+		icon_sprite : _icon_sprite,
 		clips : _clips
 	};
 }
@@ -99,23 +99,22 @@ for(var i = 0; i < 5; i++)
 	test_clips[i] = oral_clips[i];
 }
 
-scene_modes[2] = SceneMode(
-	"Test",
-	0,
-	test_clips
-);
-
-// Register built-in modes
 scene_modes[0] = SceneMode(
 	"Oral",
-	0,
+	spr_mode_oral,
 	oral_clips
 );
 
 scene_modes[1] = SceneMode(
 	"Sex",
-	1,
+	spr_mode_sex,
 	sex_clips
+);
+
+scene_modes[2] = SceneMode(
+	"Test",
+	spr_mode_test,
+	test_clips
 );
 
 mode_count = array_length(scene_modes);

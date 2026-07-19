@@ -15,96 +15,61 @@ if(_video_status == 0)
 // If we're in the cumming or recovery phase, don't draw GUI
 if(current_phase >= 3) { return; }
 
-// --------------------------------------------------
-// CONTROL BUTTONS
-// --------------------------------------------------
-
+// Control Buttons
 for(var _i = 0; _i < button_count; _i++)
 {
-	var _sprite = selected_button == _i ? button_selected : button;
+    var _button_y = button_y + (_i * button_trueheight) + button_margin_y;
 
-	var _button_y = button_y + (_i * button_trueheight) + button_margin_y;
+    if(_i >= mode_count)
+        _button_y += button_modebutton_gap;
 
-	// Add spacing between mode buttons and speed buttons
-	if(_i >= mode_count)
-	{
-		_button_y += button_modebutton_gap;
-	}
+    // MODE BUTTONS
+    if(_i < mode_count)
+    {
+        var _mode = scene_modes[_i];
 
-	var _sprite_index;
+        draw_sprite(
+            _mode.icon_sprite,
+            0,
+            button_x - button_width,
+            _button_y
+        );
 
-	// MODE BUTTONS
-	if(_i < mode_count)
-	{
-		// For now:
-		// 0 = Oral
-		// 1 = Sex
-		// Any extra modes reuse the Oral icon until
-		// custom icons are implemented.
-		if(_i == 0)
-			_sprite_index = 0;
-		else if(_i == 1)
-		{
-			if(gender == GENDERS.M)
-				_sprite_index = 2;
-			else
-				_sprite_index = 1;
-		}
-		else
-		{
-			_sprite_index = 0;
-		}
-	}
-	else
-	{
-		var _phase_button = _i - mode_count;
+        continue;
+    }
 
-		switch(_phase_button)
-		{
-			case 0:
-				_sprite_index = 3; // Slow
-			break;
+    // PHASE BUTTONS
+    var _phase_button = _i - mode_count;
 
-			case 1:
-				_sprite_index = 4; // Medium
-			break;
+    var _sprite =
+        (selected_button == _i)
+        ? button_selected
+        : button;
 
-			case 2:
-				_sprite_index = 5; // Fast
-			break;
+    var _sprite_index = _phase_button + 3;
 
-			default:
-				_sprite_index = 6; // Finish
-			break;
-		}
-	}
-
-	// Finish button disabled until pleasure full
-	if(_i == button_count - 1 && pleasure < 100)
-	{
-		draw_sprite_ext(
-			button,
-			_sprite_index,
-			button_x,
-			_button_y,
-			1,
-			1,
-			0,
-			c_white,
-			0.6
-		);
-	}
-	else
-	{
-		draw_sprite(
-			_sprite,
-			_sprite_index,
-			button_x,
-			_button_y
-		);
-	}
+    if(_i == button_count - 1 && pleasure < 100)
+    {
+        draw_sprite_ext(
+            _sprite,
+            _sprite_index,
+            button_x,
+            _button_y,
+            1,1,0,
+            c_white,
+            0.6
+        );
+    }
+    else
+    {
+        draw_sprite(
+            _sprite,
+            _sprite_index,
+            button_x,
+            _button_y
+        );
+    }
 }
-
 // --------------------------------------------------
 // PLEASURE BAR
 // --------------------------------------------------
