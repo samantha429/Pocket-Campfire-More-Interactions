@@ -98,6 +98,7 @@ ds_map_add(global.interact_bg_height, SPECIES.ZOROARK, 0.6);
 #endregion
 
 // Global game variables
+global.characters = [];
 global.game_width = 960
 global.game_height = 640
 display_set_gui_size(global.game_width, global.game_height);

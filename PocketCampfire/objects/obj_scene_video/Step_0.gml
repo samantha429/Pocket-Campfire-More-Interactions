@@ -43,13 +43,21 @@ if(video_last_position > video_get_position() && video_get_status() == video_sta
 {
 	video_last_position = -1;
 	
-	if(current_phase == 3) 
-	{
-		current_phase++;
-		event_user(3);
-	}
-	else
-		event_user(2);		// Loop voice sounds
+if(current_phase < 3)
+{
+    event_user(2);
+}
+else
+{
+    // Phase 3 is the end/cum phase.
+    // Do not open another video here.
+    current_phase = 4;
+
+    if(video_get_status() != video_status_closed)
+    {
+        video_close();
+    }
+}		// Loop voice sounds
 }
 else video_last_position = video_get_position();
 

@@ -37,84 +37,110 @@ gender_string = gender == GENDERS.M ? "m" : "f";
 scene_modes = [];
 
 oral_clips = array_create(5);
-sex_clips = array_create(5);
+sex_clips  = array_create(5);
 
-for(var _i = 0; _i < 5; _i++)
+// Where videos are stored
+var base_path = "characters/" + mon_name_file + "/";
+
+show_debug_message("==================================");
+show_debug_message("Loading character: " + mon_name_file);
+show_debug_message("Base path: " + base_path);
+
+for (var i = 0; i < 5; i++)
 {
-	// Oral clips
-	oral_clips[_i] =
-		mon_name_file + "/"
-		+ mon_name_file
-		+ "_oral_"
-		+ gender_string
-		+ "_"
-		+ string(_i + 1)
-		+ ".mp4";
+    //--------------------------------------
+    // ORAL
+    //--------------------------------------
 
-	if(!file_exists(oral_clips[_i]))
-	{
-		oral_clips[_i] =
-			mon_name_file + "/"
-			+ mon_name_file
-			+ "_oral_"
-			+ string(_i + 1)
-			+ ".mp4";
-	}
+    oral_clips[i] =
+        base_path
+        + mon_name_file
+        + "_oral_"
+        + gender_string
+        + "_"
+        + string(i + 1)
+        + ".mp4";
 
-	if(!file_exists(oral_clips[_i]))
-	{
-		oral_clips[_i] = "INVALID";
-	}
+    show_debug_message("Trying: " + oral_clips[i]);
 
-	// Sex clips
-	sex_clips[_i] =
-		mon_name_file + "/"
-		+ mon_name_file
-		+ "_sex_"
-		+ gender_string
-		+ "_"
-		+ string(_i + 1)
-		+ ".mp4";
+    if (!file_exists(oral_clips[i]))
+    {
+        show_debug_message("Missing, trying gender-neutral...");
 
-	if(!file_exists(sex_clips[_i]))
-	{
-		sex_clips[_i] =
-			mon_name_file + "/"
-			+ mon_name_file
-			+ "_sex_"
-			+ string(_i + 1)
-			+ ".mp4";
-	}
+        oral_clips[i] =
+            base_path
+            + mon_name_file
+            + "_oral_"
+            + string(i + 1)
+            + ".mp4";
+    }
 
-	if(!file_exists(sex_clips[_i]))
-	{
-		sex_clips[_i] = "INVALID";
-	}
+    show_debug_message("Exists = " + string(file_exists(oral_clips[i])));
+
+    if (!file_exists(oral_clips[i]))
+    {
+        oral_clips[i] = "INVALID";
+    }
+
+    //--------------------------------------
+    // SEX
+    //--------------------------------------
+
+    sex_clips[i] =
+        base_path
+        + mon_name_file
+        + "_sex_"
+        + gender_string
+        + "_"
+        + string(i + 1)
+        + ".mp4";
+
+    show_debug_message("Trying: " + sex_clips[i]);
+
+    if (!file_exists(sex_clips[i]))
+    {
+        show_debug_message("Missing, trying gender-neutral...");
+
+        sex_clips[i] =
+            base_path
+            + mon_name_file
+            + "_sex_"
+            + string(i + 1)
+            + ".mp4";
+    }
+
+    show_debug_message("Exists = " + string(file_exists(sex_clips[i])));
+
+    if (!file_exists(sex_clips[i]))
+    {
+        sex_clips[i] = "INVALID";
+    }
 }
 
+// Temporary Test mode
 var test_clips = array_create(5);
 
-for(var i = 0; i < 5; i++)
+for (var i = 0; i < 5; i++)
 {
-	test_clips[i] = oral_clips[i];
+    test_clips[i] = oral_clips[i];
 }
 
 scene_modes[0] = SceneMode(
-	"Oral",
-	spr_mode_oral,
-	oral_clips
+    "Oral",
+    spr_mode_oral,
+    oral_clips
 );
 
 scene_modes[1] = SceneMode(
-	"Sex",
-	spr_mode_sex,
-	sex_clips
+    "Sex",
+    spr_mode_sex,
+    sex_clips
 );
 
 scene_modes[2] = SceneMode(
-	"Test",
-	spr_mode_test,
-	test_clips
+    "Test",
+    spr_mode_test,
+    test_clips
 );
 
 mode_count = array_length(scene_modes);

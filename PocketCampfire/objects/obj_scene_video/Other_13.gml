@@ -1,6 +1,7 @@
 /// @description Start Video Swap
 
-video_close_pending = false;
-video_open_pending = false;
+// A video change has been requested.
+// Do not reset the pending flags here.
+// User Event 0 will handle closing the current video.
 
 event_user(0);
