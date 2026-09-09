@@ -1,27 +1,38 @@
 /// @description Close Video
 
-// If the video is already closed, proceed immediately.
-if(video_get_status() == video_status_closed)
-{
-    video_close_pending = false;
-    event_user(1);
-    return;
-}
-
-// Request the current video to close.
-if(!video_close_pending)
-{
-    video_close();
-    video_close_pending = true;
-}
-
-// Wait until the video is actually closed.
+// --------------------------------------------------
+// VIDEO IS NOT CLOSED YET
+// --------------------------------------------------
 if(video_get_status() != video_status_closed)
 {
-    alarm[0] = 1; // Retry after 1 frame
+    if(!video_close_pending)
+    {
+        video_close();
+        video_close_pending = true;
+    }
+
+    alarm[0] = 1;
     return;
 }
 
-// The old video is definitely closed.
+
+// --------------------------------------------------
+// VIDEO IS CLOSED
+// Give the native video player one extra frame
+// to fully release before opening the next video.
+// --------------------------------------------------
+if(!video_close_wait)
+{
+    video_close_wait = true;
+    alarm[0] = 1;
+    return;
+}
+
+
+// --------------------------------------------------
+// RELEASE WAIT COMPLETE
+// --------------------------------------------------
+video_close_wait = false;
 video_close_pending = false;
+
 event_user(1);

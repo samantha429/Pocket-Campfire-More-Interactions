@@ -185,6 +185,7 @@ video = noone;
 
 video_close_pending = false;
 video_open_pending = false;
+video_close_wait = false;
 video_last_position = -100;
 
 event_user(1);

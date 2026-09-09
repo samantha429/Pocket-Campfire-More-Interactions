@@ -94,6 +94,8 @@
     {"name":"scr_camp_mon_select","order":1,"path":"scripts/scr_camp_mon_select/scr_camp_mon_select.yy",},
     {"name":"scr_camp_release_mon","order":5,"path":"scripts/scr_camp_release_mon/scr_camp_release_mon.yy",},
     {"name":"scr_camp_spawn_mon","order":3,"path":"scripts/scr_camp_spawn_mon/scr_camp_spawn_mon.yy",},
+    {"name":"scr_character_create","order":22,"path":"scripts/scr_character_create/scr_character_create.yy",},
+    {"name":"scr_character_file_parser","order":23,"path":"scripts/scr_character_file_parser/scr_character_file_parser.yy",},
     {"name":"scr_chat","order":1,"path":"scripts/scr_chat/scr_chat.yy",},
     {"name":"scr_cook","order":4,"path":"scripts/scr_cook/scr_cook.yy",},
     {"name":"scr_create_confirmation","order":4,"path":"scripts/scr_create_confirmation/scr_create_confirmation.yy",},
