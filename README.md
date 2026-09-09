@@ -1,4 +1,4 @@
-This is an unoffical fork of Pocket Campfire.
+This is an unofficial fork of Pocket Campfire.
 This mods seeks to revamp how you can interact with your mons. 
 ## Features:
 ### Interact Menu
