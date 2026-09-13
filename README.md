@@ -8,6 +8,13 @@ This mods seeks to revamp how you can interact with your mons.
 ### Sex
 - More sex scenes
 - Mon specific scenes
+   - Alolan Vulpix: Full body
+   - Braixen: Breastfeeding handjob
+   - Cinderace: Nipple play reverse cowgirl
+   - Lucario: Ass job
+   - Nickit: Footjob
+   - Vulpix: Upside down full body
+   - Zoroark: Blowjob boobjob
 ### Mod support
 - Allow modders to create their own sex scenes, "Show Off" options, etc.
 - Allow modders to create their own mons.
