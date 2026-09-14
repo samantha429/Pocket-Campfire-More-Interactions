@@ -113,6 +113,7 @@
     {"name":"scr_get_intimate","order":3,"path":"scripts/scr_get_intimate/scr_get_intimate.yy",},
     {"name":"scr_get_item_description","order":1,"path":"scripts/scr_get_item_description/scr_get_item_description.yy",},
     {"name":"scr_get_item_rarity","order":5,"path":"scripts/scr_get_item_rarity/scr_get_item_rarity.yy",},
+    {"name":"scr_get_mode_icon","order":12,"path":"scripts/scr_get_mode_icon/scr_get_mode_icon.yy",},
     {"name":"scr_get_mon_sprite","order":9,"path":"scripts/scr_get_mon_sprite/scr_get_mon_sprite.yy",},
     {"name":"scr_get_species_name","order":8,"path":"scripts/scr_get_species_name/scr_get_species_name.yy",},
     {"name":"scr_get_volume","order":10,"path":"scripts/scr_get_volume/scr_get_volume.yy",},

@@ -1,0 +1,338 @@
+[[Variables:]]
+
+[name]
+Zoroark
+
+[mon height]
+0
+
+[mon scale]
+1.05
+
+[bg height]
+0.6
+
+[menu offset]
+0
+
+[berries]
+colbur
+[end berries]
+
+[gender]
+mf
+
+[[Sprites:]]
+
+[spr camp]
+zoroark\Camp.png
+
+[male]
+[spr interact new]
+zoroark\male\spr_new.png
+[spr interact new happy]
+zoroark\male\spr_new_happy.png
+[spr interact new angry]
+zoroark\male\spr_new_angry.png
+[spr interact]
+zoroark\male\spr_neutral.png
+[spr interact x cover]
+zoroark\male\spr_low_x.png
+[spr interact x]
+zoroark\male\spr_neutral_x.png
+[spr interact happy]
+zoroark\male\spr_neutral_happy.png
+[spr interact happy x cover]
+zoroark\male\spr_low_happy_x.png
+[spr interact happy x]
+zoroark\male\spr_neutral_happy_x.png
+[spr interact angry]
+zoroark\male\spr_neutral_angry.png
+[spr showoff]
+zoroark\male\spr_showoff_low.png
+[spr showoff x]
+zoroark\male\spr_showoff_low_x.png
+[spr play 1]
+zoroark\male\spr_intimate.png
+[spr play 2]
+zoroark\male\spr_intimate_2.png
+[spr interact max]
+zoroark\male\spr_high.png
+[spr interact max x]
+zoroark\male\spr_high_x.png
+[spr interact max happy]
+zoroark\male\spr_high_happy.png
+[spr interact max happy x]
+zoroark\male\spr_high_happy_x.png
+[spr interact max angry]
+zoroark\male\spr_high_angry.png
+[spr showoff max]
+zoroark\male\spr_showoff.png
+[spr showoff max x]
+zoroark\male\spr_showoff_x.png
+[spr play max 1]
+zoroark\male\spr_intimate_high.png
+[spr play max 2]
+zoroark\male\spr_intimate_high_2.png
+
+
+[female]
+[spr interact new]
+zoroark\female\spr_new.png
+[spr interact new happy]
+zoroark\female\spr_new_happy.png
+[spr interact new angry]
+zoroark\female\spr_new_angry.png
+[spr interact]
+zoroark\female\spr_neutral.png
+[spr interact x cover]
+zoroark\female\spr_low_x.png
+[spr interact x]
+zoroark\female\spr_neutral_x.png
+[spr interact happy]
+zoroark\female\spr_neutral_happy.png
+[spr interact happy x cover]
+zoroark\female\spr_low_happy_x.png
+[spr interact happy x]
+zoroark\female\spr_neutral_happy_x.png
+[spr interact angry]
+zoroark\female\spr_neutral_angry.png
+[spr showoff]
+zoroark\female\spr_showoff_low.png
+[spr showoff x]
+zoroark\female\spr_showoff_low_x.png
+[spr play 1]
+zoroark\female\spr_intimate.png
+[spr play 2]
+zoroark\female\spr_intimate_2.png
+[spr interact max]
+zoroark\female\spr_high.png
+[spr interact max x]
+zoroark\female\spr_high_x.png
+[spr interact max happy]
+zoroark\female\spr_high_happy.png
+[spr interact max happy x]
+zoroark\female\spr_high_happy_x.png
+[spr interact max angry]
+zoroark\female\spr_high_angry.png
+[spr showoff max]
+zoroark\female\spr_showoff.png
+[spr showoff max x]
+zoroark\female\spr_showoff_x.png
+[spr play max 1]
+zoroark\female\spr_intimate_high.png
+[spr play max 2]
+zoroark\female\spr_intimate_high_2.png
+
+
+[nongendered]
+
+
+[[Localisation:]]
+
+
+[txt chat new]
+NAME is occasionally performing illusions of other 'Mons in the forest. In turn I try to mimick HIS_HER_L illusions, which turns into a funny bonding exercise!
+FAIL I lower to a crouch and try to get closer to NAME, but HE_SHE_L's not having it and snarls at me!
+[end txt chat new]
+
+[txt chat low]
+NAME is occasionally performing illusions of other 'Mons in the forest. I try to mimick HIS_HER_L illusions as well, which turns into a funny bonding exercise!
+NAME and I try to climb a nearby tree for fun, but HE_SHE_L's way better at it than me... I can hear HIM_HER_L snicker from above as I slide back to the ground!
+NAME and I play a game of hide and seek, it's much like that prop hunting game I recently saw... Needless to say, I lost this one embarassingly hard.
+[end txt chat low]
+
+[txt chat medium]
+NAME and I try to climb a nearby tree for fun, but HE_SHE_L's way better at it than me... I can hear HIM_HER_L snicker from above as I slide back to the ground!
+NAME and I play a game of hide and seek, it's much like that prop hunting game I recently saw... Needless to say, I lost this one embarassingly hard.
+[group]
+1
+NAME and I help resolve some petty fights and groom other 'Mons together. It's almost as if we're parents, it gives me a strange sense of butterflies in my stomach!
+[end txt chat medium]
+
+[txt chat high]
+NAME and I talk about stuff to do and we're feeling a little mischievous. We go to a nearby route and prank some unsuspecting travelers with NAME's illusions!
+NAME and I play a game of hide and seek, it's much like that prop hunting game I recently saw... Needless to say, I lost this one embarassingly hard.
+[group]
+1
+NAME and I help resolve some petty fights and groom other 'Mons together. It's almost as if we're parents, it gives me a strange sense of butterflies in my stomach!
+[end txt chat high]
+
+[txt chat max]
+NAME and I talk about stuff to do and we're feeling a little mischievous. We go to a nearby route and prank some unsuspecting travelers with NAME's illusions!
+NAME and I play a game of hide and seek, it's much like that prop hunting game I recently saw... Needless to say, I lost this one embarassingly hard.
+[group]
+1
+NAME and I help resolve some petty fights and groom other 'Mons together. It's almost as if we're parents, it gives me a strange sense of butterflies in my stomach!
+[end txt chat max]
+
+
+[txt examine new]
+Wow, a SPECIES! Never thought I'd find one, they are masters at hiding where they live. They can be dangerous though, I should approach this one with caution.
+NAME is trying to untangle some of the clumps that formed in HIS_HER_L hair, but to little avail. Maybe I can earn HIM_HER_L trust by helping out?
+[male]
+It's weird seeing a male NAME without HIS_HER_L mate.\nLikely means HE_SHE_L's a virgin, which is turning me on...\nI'd gladly help HIM_HER_L get HIS_HER_L dick wet!
+[female]
+It's weird seeing a female NAME without HIM_HER_L young.\nLikely means HE_SHE_L's a virgin, which is turning me on...\nI'd gladly help put some kids inside HIM_HER_L!
+[nongendered]
+[end txt examine new]
+
+[txt examine low]
+Still can't believe I found a SPECIES, they are masters at hiding their habitat. They can be dangerous though, I should approach this one with caution.
+I didn't expect NAME to get along so well with the other 'Mons, it seems to take a kind of nurturing position towards them, it's very cute!
+[male]
+It's weird seeing a male SPECIES without HIS_HER_L mate.\nLikely means HE_SHE_L's a virgin, which is turning me on...\nI'd gladly help HIM_HER_L get HIS_HER_L dick wet!
+[female]
+It's weird seeing a female SPECIES without HIM_HER_L young.\nLikely means HE_SHE_L's a virgin, which is turning me on...\nI'd gladly help put some kids inside HIM_HER_L!
+[nongendered]
+[end txt examine low]
+
+[txt examine medium]
+NAME has started to act kind of like a parent to me and the other 'Mons! HE_SHE grooms us, snarls to stop fights and helps me do the cooking. Such a misunderstood species!
+I've gotten to the point where I'm allowed to take naps on NAME's hair! It's so incredibly soft and comforting, it makes me feel like a sleepy little Zorua...
+[end txt examine medium]
+
+[txt examine high]
+I've gotten to the point where I'm allowed to sleep on NAME's hair during the night! It's so incredibly soft and comforting, it makes me feel like a sleepy little Zorua...
+NAME and I have basically become the unofficial parents of all 'Mons at the camp, it makes me feel so attracted to HIM_HER_L... It's a very fulfilling feeling!
+I've really fallen in love with NAME, HIS_HER_L parental nature and loving personality awaken a feeling inside me... I can't wait to take HIS_HER_L virginity, I'd have kids with HIM_HER_L if I could...
+[end txt examine high]
+
+[txt examine max]
+I've gotten to the point where I'm allowed to sleep on NAME's hair during the night! It's so incredibly soft and comforting, it makes me feel like a sleepy little Zorua...
+NAME and I have basically become the unofficial parents of all 'Mons at the camp, it makes me feel so attracted to HIM_HER_L... It's a very fulfilling feeling!
+I've really fallen in love with NAME, HIS_HER_L parental nature and loving personality awaken a feeling inside me... I can't wait to take HIS_HER_L virginity, I'd have kids with HIM_HER_L if I could...
+[end txt examine max]
+
+
+[txt pet new]
+NAME got HIS_HER_L hair all tangled up, so I get a comb.\nHE_SHE seems to understand my intention and reluctantly lets me fix it, not really petting but still great for bonding!
+[end txt pet new]
+
+[txt pet low]
+NAME got HIS_HER_L hair all tangled up again, so I sit down to fix it for HIM_HER_L with a hairbrush. It's a pretty intimate bonding activity, HE_SHE_L's definitely enjoying it!
+[end txt pet low]
+
+[txt pet medium]
+I run my hands through NAME's hair and HE_SHE_L caresses mine back in return. Compared to the other 'Mons, this one's very two-sided in terms of petting sessions!
+[end txt pet medium]
+
+[txt pet high]
+I reach to pet NAME, but HE_SHE_L stops me and sits me down in front of HIM_HER_L. HE_SHE begins to groom and caress me instead, making me briefly fall asleep laying in HIS_HER_L arms!
+[end txt pet high]
+
+[txt pet max]
+I reach to pet NAME, but HE_SHE_L stops me and sits me down in front of HIM_HER_L. HE_SHE begins to groom and caress me instead, making me briefly fall asleep laying in HIS_HER_L arms!
+[end txt pet max]
+
+
+[txt showoff low]
+I tell NAME HE_SHE_L's breathtakingly beautiful, I can tell from HIS_HER_L reaction that HE_SHE_L's never had a mate before!\nI ask for a peek and HE_SHE_L's too flustered to protest..."
+[end txt showoff low]
+
+[txt showoff medium]
+I plead NAME to show off HIS_HER_L incredible beauty for me... HE_SHE smiles warmly and surprises me with incredible posing and seduction skills, it makes me hard instantly...
+[end txt showoff medium]
+
+[txt showoff medium x]
+I plead NAME to show off HIS_HER_L incredible beauty for me... HE_SHE smiles warmly and surprises me with incredible posing and seduction skills, it makes me hard instantly...
+[end txt showoff medium x]
+
+[txt showoff high]
+In reponse to me asking NAME to show HIS_HER_L sexy body, HE_SHE_L uses illusions to mimic and pose as several other incredibly attractive 'Mons. It's like cosplay, but better!
+[end txt showoff high]
+
+[txt showoff max]
+In reponse to me asking NAME to show HIS_HER_L sexy body, HE_SHE_L uses illusions to mimic and pose as several other incredibly attractive 'Mons. It's like cosplay, but better!
+[end txt showoff max]
+
+
+[txt intimate high]
+[male]
+Since NAME always acts so parental, I get a fun idea and get some sex toy eggs from my tent. HIS_HER face beams at the sight of them and I sit HIM_HER_L down with legs spread.|I take one of the eggs and push it inside HIS_HER_L ass, making HIM_HER_L huff and grit HIS_HER_L teeth. I add more and more until HE_SHE_L's all filled up, making HIM_HER_L moan and huff.|NAME cries out in pleasure and orgasms as HE_SHE_L pushes the eggs out one by one, while I jerk off to the sight of it. I cum over HIS_HER_L abdomen and then spoon with HIM_HER_L!
+[female]
+Since NAME always acts so motherly, I get a fun idea and get some sex toy eggs from my tent. HIM_HER face beams at the sight of them and I sit HIM_HER_L down with legs spread.|I take one of the eggs and push it inside HIM_HER_L pussy, making HIM_HER_L huff and grit HIM_HER_L teeth. I add more and more until they reach HIM_HER_L cervix, making HIM_HER_L moan and huff.|NAME cries out in pleasure and orgasms as HE_SHE_L pushes the eggs out one by one, while I jerk off to the sight of it. I cum over HIM_HER_L abdomen and then spoon with HIM_HER_L!
+[end txt intimate high]
+
+[txt intimate max]
+[male]
+Since NAME always acts so parental, I get a fun idea and get some sex toy eggs from my tent. HIS_HER face beams at the sight of them and I sit HIM_HER_L down with legs spread.|I take one of the eggs and push it inside HIS_HER_L ass, making HIM_HER_L huff and grit HIS_HER_L teeth. I add more and more until HE_SHE_L's all filled up, making HIM_HER_L moan and huff.|NAME cries out in pleasure and orgasms as HE_SHE_L pushes the eggs out one by one, while I jerk off to the sight of it. I cum over HIS_HER_L abdomen and then spoon with HIM_HER_L!
+I can't get the thought of making NAME a father out of my head, so I propose a little role-play. HE_SHE excitedly casts an illusion that transforms me into a female NAME!|After putting a condom on HIM_HER_L and fitting HIS_HER_L cock in my new pussy, NAME begins to lovingly fuck and caress me. Halfway, I remove the condom and beg HIM_HER_L to impregnate me!|HE_SHE nods, violently fucks me and then cums deep inside me. HE_SHE pulls out and makes me 'lay eggs' through an illusion, after which we hold each other and pretend they're ours!
+[female]
+Since NAME always acts so motherly, I get a fun idea and get some sex toy eggs from my tent. HIM_HER face beams at the sight of them and I sit HIM_HER_L down with legs spread.|I take one of the eggs and push it inside HIM_HER_L pussy, making HIM_HER_L huff and grit HIM_HER_L teeth. I add more and more until they reach HIM_HER_L cervix, making HIM_HER_L moan and huff.|NAME cries out in pleasure and orgasms as HE_SHE_L pushes the eggs out one by one, while I jerk off to the sight of it. I cum over HIM_HER_L abdomen and then spoon with HIM_HER_L!
+I can't get the thought of putting kids inside NAME out of my head, so I propose a little role-play. HE_SHE excitedly casts an illusion that transforms me into a male SPECIES!|After putting a condom on and fitting my fancy cock in NAME's pussy, I begin to lovingly fuck and caress HIM_HER_L. Halfway, I remove the condom and ask to impregnate HIM_HER_L.|HE_SHE begs for it, so I violently fuck HIM_HER_L and cum deep inside HIM_HER_L. I pull out and HE_SHE_L 'lays eggs' through an illusion, after which we hold each other and pretend they're ours!
+[end txt intimate max]
+
+[nongendered]
+
+
+[txt scene start high]
+NAME is so worked up over losing HIS_HER_L virginity to me, HE_SHE_L feels some performance pressure! I bolster HIS_HER_L confidence and we intimately make out before we begin to breed...
+[end txt scene start high]
+
+[txt scene start max]
+NAME uses a few illusions of other attractive 'Mons to give me a little slice of heaven... HE_SHE_L taunts me over my raging erection before getting on HIS_HER_L knees to 'treat' it!
+[end txt scene start max]
+
+[txt scene end a high]
+Ah, h-hah... Wow! It's amazing how real of a connection there is when mating humanoid Mons, especially with first times... It's crazy how close they are to humans.
+F-fuck, oh sweet Arceus... I came my brains out and NAME did multiple times from officially losing HIS_HER_L virginity. We make out and cuddle as we recover...
+[end txt scene end a high]
+
+[txt scene end a max]
+[male]
+A-ah, fuck man...... I need a breather after that... NAME's juicy dick and mouth-watering figure are so fucking hot, I could keep railing HIM_HER_L all day...
+H-hah... I can't with NAME, I'm so stupidly in love with HIM_HER_L... I feel a little sad I can't be HIS_HER_L mate for real, but I'm sure HE_SHE_L'll find one someday!
+[female]
+A-ah, fuck man...... I need a breather after that... NAME's tight pussy and mouth-watering figure are so fucking hot, I could keep railing HIM_HER_L all day...
+H-hah... I can't with NAME, I'm so stupidly in love with HIM_HER_L... I feel a little sad I can't actually put kids in HIM_HER_L, but role-playing impreg is great too!
+[end txt scene end a max]
+
+[nongendered]
+
+[txt scene end b high]
+NAME and I full-body spoon while we catch our breaths, my semi-hard dick sandwiched in between HIS_HER_L thighs. After some sultry post-sex intimacy, we crawl outside...
+NAME sits HIM_HER_L ass down on my softening dick and pins my arms to the ground, as to say 'There, you're mine now'! I chuckle and lovingly make out with HIM_HER_L before getting up.
+[end txt scene end b high]
+
+[txt scene end b max]
+NAME is in breed mode and NOT satisfied, so HE_SHE_L gets me hard again with some naughty illusions and rides my dick until I lose count of my orgasms... My head spins...
+[male]
+I'm not yet satisfied and grab NAME's hips, making HIS_HER_L cock bounce while I aggressively fuck and pump another fat load inside HIS_HER_L ass! H-hah, better than humans...
+[female]
+I'm not yet satisfied and grab NAME's hips, making HIM_HER_L tits bounce while I aggressively fuck and pump another fat load inside HIM_HER_L womb! H-hah, better than humans...
+[end txt scene end b max]
+
+[nongendered]
+
+[[Sounds:]]
+
+[cry]
+zoroark\snd_zoroark_default.ogg
+[cry happy]
+zoroark\snd_zoroark_happy.ogg
+[cry x]
+zoroark\snd_zoroark_aroused.ogg
+[cry sad]
+zoroark\snd_zoroark_sad.ogg
+
+
+[[Scene Modes:]]
+
+[mode]
+[name]
+Oral
+[prefix]
+oral
+[phases]
+5
+[end mode]
+
+[mode]
+[name]
+Sex
+[prefix]
+sex
+[phases]
+5
+[end mode]

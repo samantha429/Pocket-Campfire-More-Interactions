@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_get_mode_icon",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_get_mode_icon",
+  "parent":{
+    "name":"Getters",
+    "path":"folders/Scripts/Getters.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

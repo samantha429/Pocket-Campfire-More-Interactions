@@ -132,3 +132,12 @@ global.interaction_sprite_object = noone;
 alarm[0] = 5;
 
 randomize();
+
+LoadCharacters();
+
+// TEMPORARY — remove once confirmed working
+for(var _i = 0; _i < array_length(global.characters); _i++)
+{
+	var _c = global.characters[_i];
+	show_debug_message("  - " + _c.key + ": " + string(array_length(_c.scene_mode_defs)) + " mode(s)");
+}

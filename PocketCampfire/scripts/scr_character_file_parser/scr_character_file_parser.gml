@@ -190,3 +190,30 @@ function ParseCharacterFile(_path)
 
 	return _root;
 }
+
+function CFP_ExtractRepeated(_parsed_value, _tag_name)
+{
+	// A repeated tag can resolve three ways depending on how many times
+	// it appeared: absent, a bare struct { <tag>: value } for exactly one,
+	// or an array of { tag, value } items for two or more. Normalize all
+	// three to a plain array of values.
+	var _out = [];
+
+	if(is_array(_parsed_value))
+	{
+		for(var _i = 0; _i < array_length(_parsed_value); _i++)
+		{
+			var _entry = _parsed_value[_i];
+			if(is_struct(_entry) && variable_struct_exists(_entry, "tag") && _entry.tag == _tag_name)
+			{
+				array_push(_out, _entry.value);
+			}
+		}
+	}
+	else if(is_struct(_parsed_value) && variable_struct_exists(_parsed_value, _tag_name))
+	{
+		array_push(_out, _parsed_value[$ _tag_name]);
+	}
+
+	return _out;
+}
