@@ -1,5 +1,3 @@
-/// Create Event
-
 function SceneMode(_name, _icon_sprite, _clips)
 {
 	return {
@@ -12,7 +10,6 @@ function SceneMode(_name, _icon_sprite, _clips)
 mon_species = global.active_mon[? "species"];
 
 lut_sampler = shader_get_sampler_index(sh_lut, "s_Lut");
-lut_texture = sprite_get_texture(spr_scene_lut, mon_species + 1);
 
 // State Variables
 finished = false;
@@ -31,117 +28,81 @@ gender = global.active_mon[? "gender"];
 gender_string = gender == GENDERS.M ? "m" : "f";
 
 // --------------------------------------------------
+// CHARACTER LOOKUP
+// --------------------------------------------------
+
+char_data = noone;
+
+for(var _i = 0; _i < array_length(global.characters); _i++)
+{
+	if(global.characters[_i].key == mon_name_file)
+	{
+		char_data = global.characters[_i];
+		break;
+	}
+}
+
+if(char_data == noone)
+{
+	show_debug_message("obj_scene_video: no character data found for \"" + mon_name_file + "\" — scene cannot load modes.");
+}
+
+// --------------------------------------------------
+// LUT TEXTURE
+// --------------------------------------------------
+
+if(is_string(mon_species))
+{
+	// Modded character: load their own LUT at runtime, falling back
+	// to the base game's neutral LUT if they didn't supply one.
+	var _lut_path = (char_data != noone) ? char_data.folder_path + "lut.png" : "";
+	var _lut_sprite = (_lut_path != "" && file_exists(_lut_path))
+		? sprite_add(_lut_path, 1, false, false, 0, 0)
+		: spr_scene_lut;
+	lut_texture = sprite_get_texture(_lut_sprite, 0);
+}
+else
+{
+	// Built-in species: shared strip sprite, one frame per species.
+	lut_texture = sprite_get_texture(spr_scene_lut, mon_species + 1);
+}
+
+// --------------------------------------------------
 // MODE DATA
 // --------------------------------------------------
 
 scene_modes = [];
 
-oral_clips = array_create(5);
-sex_clips  = array_create(5);
-
-// Where videos are stored
-var base_path = "characters/" + mon_name_file + "/";
-
-show_debug_message("==================================");
-show_debug_message("Loading character: " + mon_name_file);
-show_debug_message("Base path: " + base_path);
-
-for (var i = 0; i < 5; i++)
+if(char_data != noone)
 {
-    //--------------------------------------
-    // ORAL
-    //--------------------------------------
+	show_debug_message("==================================");
+	show_debug_message("Loading character: " + mon_name_file);
 
-    oral_clips[i] =
-        base_path
-        + mon_name_file
-        + "_oral_"
-        + gender_string
-        + "_"
-        + string(i + 1)
-        + ".mp4";
+	for(var _i = 0; _i < array_length(char_data.scene_mode_defs); _i++)
+	{
+		var _def = char_data.scene_mode_defs[_i];
+		var _clips = array_create(_def.phases);
 
-    show_debug_message("Trying: " + oral_clips[i]);
+		for(var _p = 0; _p < _def.phases; _p++)
+		{
+			var _clip = char_data.folder_path + mon_name_file + "_" + _def.prefix + "_" + gender_string + "_" + string(_p + 1) + ".mp4";
 
-    if (!file_exists(oral_clips[i]))
-    {
-        show_debug_message("Missing, trying gender-neutral...");
+			show_debug_message("Trying: " + _clip);
 
-        oral_clips[i] =
-            base_path
-            + mon_name_file
-            + "_oral_"
-            + string(i + 1)
-            + ".mp4";
-    }
+			if(!file_exists(_clip))
+			{
+				show_debug_message("Missing, trying gender-neutral...");
+				_clip = char_data.folder_path + mon_name_file + "_" + _def.prefix + "_" + string(_p + 1) + ".mp4";
+			}
 
-    show_debug_message("Exists = " + string(file_exists(oral_clips[i])));
+			show_debug_message("Exists = " + string(file_exists(_clip)));
 
-    if (!file_exists(oral_clips[i]))
-    {
-        oral_clips[i] = "INVALID";
-    }
+			_clips[_p] = file_exists(_clip) ? _clip : "INVALID";
+		}
 
-    //--------------------------------------
-    // SEX
-    //--------------------------------------
-
-    sex_clips[i] =
-        base_path
-        + mon_name_file
-        + "_sex_"
-        + gender_string
-        + "_"
-        + string(i + 1)
-        + ".mp4";
-
-    show_debug_message("Trying: " + sex_clips[i]);
-
-    if (!file_exists(sex_clips[i]))
-    {
-        show_debug_message("Missing, trying gender-neutral...");
-
-        sex_clips[i] =
-            base_path
-            + mon_name_file
-            + "_sex_"
-            + string(i + 1)
-            + ".mp4";
-    }
-
-    show_debug_message("Exists = " + string(file_exists(sex_clips[i])));
-
-    if (!file_exists(sex_clips[i]))
-    {
-        sex_clips[i] = "INVALID";
-    }
+		scene_modes[_i] = SceneMode(_def.name, GetModeIcon(_def.name, char_data, _def), _clips);
+	}
 }
-
-// Temporary Test mode
-var test_clips = array_create(5);
-
-for (var i = 0; i < 5; i++)
-{
-    test_clips[i] = oral_clips[i];
-}
-
-scene_modes[0] = SceneMode(
-    "Oral",
-    spr_mode_oral,
-    oral_clips
-);
-
-scene_modes[1] = SceneMode(
-    "Sex",
-    spr_mode_sex,
-    sex_clips
-);
-
-scene_modes[2] = SceneMode(
-    "Test",
-    spr_mode_test,
-    test_clips
-);
 
 mode_count = array_length(scene_modes);
 
