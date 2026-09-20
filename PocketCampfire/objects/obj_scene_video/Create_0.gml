@@ -106,6 +106,31 @@ if(char_data != noone)
 
 mode_count = array_length(scene_modes);
 
+mode_button_count = 3; // Oral, Sex, Cycle — fixed regardless of total modes
+
+oral_mode_index = -1;
+sex_mode_index = -1;
+cycle_mode_indices = [];
+cycle_position = -1;
+
+for(var _i = 0; _i < array_length(scene_modes); _i++)
+{
+	var _mode_name = scene_modes[_i].name;
+
+	if(_mode_name == "Oral")
+	{
+		oral_mode_index = _i;
+	}
+	else if(_mode_name == "Sex")
+	{
+		sex_mode_index = _i;
+	}
+	else
+	{
+		array_push(cycle_mode_indices, _i);
+	}
+}
+
 // --------------------------------------------------
 // AUDIO
 // --------------------------------------------------
@@ -182,7 +207,7 @@ max_pleasure = 100;
 button = spr_scene_controlbutton;
 button_selected = spr_scene_controlbutton_selected;
 
-button_count = mode_count + 4;
+button_count = mode_button_count + 4;
 
 button_width = sprite_get_width(button);
 button_height = sprite_get_height(button);

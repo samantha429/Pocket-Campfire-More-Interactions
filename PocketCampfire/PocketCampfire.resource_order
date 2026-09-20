@@ -234,6 +234,7 @@
     {"name":"spr_mainmenu_background_new","order":7,"path":"sprites/spr_mainmenu_background_new/spr_mainmenu_background_new.yy",},
     {"name":"spr_mainmenu_background","order":5,"path":"sprites/spr_mainmenu_background/spr_mainmenu_background.yy",},
     {"name":"spr_mainmenu_button_exit","order":1,"path":"sprites/spr_mainmenu_button_exit/spr_mainmenu_button_exit.yy",},
+    {"name":"spr_mode_cycle","order":9,"path":"sprites/spr_mode_cycle/spr_mode_cycle.yy",},
     {"name":"spr_mode_oral","order":6,"path":"sprites/spr_mode_oral/spr_mode_oral.yy",},
     {"name":"spr_mode_sex","order":7,"path":"sprites/spr_mode_sex/spr_mode_sex.yy",},
     {"name":"spr_mode_test","order":8,"path":"sprites/spr_mode_test/spr_mode_test.yy",},

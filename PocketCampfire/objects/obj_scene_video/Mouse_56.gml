@@ -36,17 +36,39 @@ if(selected_button == -1)
 	return; 
 }
 
-if(selected_button < mode_count)
+if(selected_button < mode_button_count)
 {
-    target_mode = selected_button;
+    var _target_mode_index = -1;
 
-    fading = true;
-    fade_dir = 1;
-    target_phase = 0;
+    switch(selected_button)
+    {
+        case 0:
+            _target_mode_index = oral_mode_index;
+        break;
+        case 1:
+            _target_mode_index = sex_mode_index;
+        break;
+        case 2:
+            if(array_length(cycle_mode_indices) > 0)
+            {
+                cycle_position = (cycle_position + 1) mod array_length(cycle_mode_indices);
+                _target_mode_index = cycle_mode_indices[cycle_position];
+            }
+        break;
+    }
+
+    if(_target_mode_index != -1)
+    {
+        target_mode = _target_mode_index;
+
+        fading = true;
+        fade_dir = 1;
+        target_phase = 0;
+    }
 }
 else
 {
-    var phase_button = selected_button - mode_count;
+    var phase_button = selected_button - mode_button_count;
 
     if(phase_button < 3)
     {

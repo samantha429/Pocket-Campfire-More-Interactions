@@ -427,6 +427,7 @@
     {"id":{"name":"spr_mainmenu_background","path":"sprites/spr_mainmenu_background/spr_mainmenu_background.yy",},},
     {"id":{"name":"spr_mainmenu_button_exit","path":"sprites/spr_mainmenu_button_exit/spr_mainmenu_button_exit.yy",},},
     {"id":{"name":"spr_mainmenu_button","path":"sprites/spr_mainmenu_button/spr_mainmenu_button.yy",},},
+    {"id":{"name":"spr_mode_cycle","path":"sprites/spr_mode_cycle/spr_mode_cycle.yy",},},
     {"id":{"name":"spr_mode_oral","path":"sprites/spr_mode_oral/spr_mode_oral.yy",},},
     {"id":{"name":"spr_mode_sex","path":"sprites/spr_mode_sex/spr_mode_sex.yy",},},
     {"id":{"name":"spr_mode_test","path":"sprites/spr_mode_test/spr_mode_test.yy",},},

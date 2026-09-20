@@ -333,3 +333,12 @@ sex
 [phases]
 5
 [end mode]
+
+[mode]
+[name]
+Test
+[prefix]
+oral
+[phases]
+5
+[end mode]

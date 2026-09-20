@@ -20,26 +20,39 @@ for(var _i = 0; _i < button_count; _i++)
 {
     var _button_y = button_y + (_i * button_trueheight) + button_margin_y;
 
-    if(_i >= mode_count)
+    if(_i >= mode_button_count)
         _button_y += button_modebutton_gap;
-
     // MODE BUTTONS
-    if(_i < mode_count)
+    if(_i < mode_button_count)
     {
-        var _mode = scene_modes[_i];
+        var _icon_sprite = noone;
 
-        draw_sprite(
-            _mode.icon_sprite,
-            0,
-            button_x - button_width,
-            _button_y
-        );
+        switch(_i)
+        {
+            case 0:
+                if(oral_mode_index != -1) _icon_sprite = scene_modes[oral_mode_index].icon_sprite;
+            break;
+            case 1:
+                if(sex_mode_index != -1) _icon_sprite = scene_modes[sex_mode_index].icon_sprite;
+            break;
+            case 2:
+                _icon_sprite = spr_mode_cycle;
+            break;
+        }
 
+        if(_icon_sprite != noone)
+        {
+            draw_sprite(
+                _icon_sprite,
+                0,
+                button_x - button_width,
+                _button_y
+            );
+        }
         continue;
     }
-
     // PHASE BUTTONS
-    var _phase_button = _i - mode_count;
+    var _phase_button = _i - mode_button_count;
 
     var _sprite =
         (selected_button == _i)
