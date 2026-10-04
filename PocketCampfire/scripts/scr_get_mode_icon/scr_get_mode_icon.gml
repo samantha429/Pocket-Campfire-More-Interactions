@@ -18,5 +18,5 @@ function GetModeIcon(_mode_name, _char, _mode_def)
 		case "test": return spr_mode_test;
 	}
 
-	return spr_mode_default;
+	return noone;
 }

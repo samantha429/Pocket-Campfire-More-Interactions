@@ -1,0 +1,36 @@
+[[Variables:]]
+
+[name]
+Nickit
+
+[mon height]
+0.12
+
+[mon scale]
+0.93
+
+[bg height]
+0
+
+[gender]
+mf
+
+[[Scene Modes:]]
+
+[mode]
+[name]
+Oral
+[prefix]
+oral
+[phases]
+5
+[end mode]
+
+[mode]
+[name]
+Sex
+[prefix]
+sex
+[phases]
+5
+[end mode]
