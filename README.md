@@ -8,7 +8,8 @@ This mods seeks to revamp how you can interact with your mons.
 - "Intimacy" options
    - This would allow modders to create new ways for you to interact with your mons intimately outside of sex.
 ### Sex
-- More sex scenes
+- More global sex scenes
+   - Anal
 - Mon specific scenes
    - Alolan Vulpix: Full body
    - Braixen (fem): Breastfeeding handjob
@@ -20,8 +21,8 @@ This mods seeks to revamp how you can interact with your mons.
    - Zoroark (fem): Blowjob boobjob
    - Zoroark (male): 69
 ### Mod support
-- Allow modders to create their own sex scenes, "Show Off" options, "Intimacy" options etc.
-- Allow modders to create their own mons.
+- Allow modders to create their own sex scenes, "Show Off" options (WIP), "Intimacy" options (WIP), etc (WIP)...
+- Allow modders to create their own mons. (WIP)
 ## Current Progress:
 - More sex scenes: 50%
 - Mon specific scenes: 50%
