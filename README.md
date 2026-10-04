@@ -23,9 +23,9 @@ This mods seeks to revamp how you can interact with your mons.
 - Allow modders to create their own sex scenes, "Show Off" options, "Intimacy" options etc.
 - Allow modders to create their own mons.
 ## Current Progress:
-- More sex scenes: 47%
-- Mon specific scenes: 27%
-- Modding support: 47%
+- More sex scenes: 50%
+- Mon specific scenes: 50%
+- Modding support: 50%
 - "Show Off" options: 0%
 - Cuddle: 0%
 - "Intimacy" options: 0%
