@@ -1,0 +1,24 @@
+To make a new scene for an existing mon, local the .txt file in the mon's folder.
+
+Open the file and find the section that says, "[[Scene Modes:]]".
+
+Paste this
+[mode]
+[name]
+[prefix]
+[phases]
+[end mode]
+under the existing modes.
+
+Under "[name]" write the name of your new scene (the first letter should be uppercase).
+
+Under "[prefix]" write the name of you mode (the first letter should be lowercase).
+
+Under "[phases]" write the number of video files for the scene per gender (if you have 5 for male and 5 for female write 5)
+
+The names of your video files should follow this naming convention:
+nameofmon_scenename_gender_phase
+
+Examples:
+Braixen's vaginal sex scene video 1: braixen_sex_f_1
+Some scenes are gender neutral like Braixen's oral scene, that would be formatted like this: braixen_oral_1
