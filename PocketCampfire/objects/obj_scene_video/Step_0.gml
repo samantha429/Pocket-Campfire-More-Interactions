@@ -41,23 +41,15 @@ else
 // Handle logic on loops
 if(video_last_position > video_get_position() && video_get_status() == video_status_playing)
 {
-	video_last_position = -1;
-	
-if(current_phase < 3)
-{
-    event_user(2);
-}
-else
-{
-    // Phase 3 is the end/cum phase.
-    // Do not open another video here.
-    current_phase = 4;
+    video_last_position = -1;
 
-    if(video_get_status() != video_status_closed)
+    if(current_phase == 3)
     {
-        video_close();
+        current_phase++;
+        event_user(3);
     }
-}		// Loop voice sounds
+    else
+        event_user(2);      // Loop voice sounds
 }
 else video_last_position = video_get_position();
 
@@ -84,10 +76,10 @@ if(_k == _finish_button && pleasure < 100)
 	
 	var _button_x1 = button_x - button_width;
 	var _button_y1 = button_y + _k * button_trueheight + button_margin_y;
-	if(_k >= mode_count)
-{
-	_button_y1 += button_modebutton_gap;
-}	// Add the mode gap offset for buttons after them
+	if(_k >= mode_button_count)
+	{
+		_button_y1 += button_modebutton_gap;
+	}
 	var _button_x2 = button_x;
 	var _button_y2 = _button_y1 + button_height;
 	

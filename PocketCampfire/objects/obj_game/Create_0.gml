@@ -102,7 +102,7 @@ global.characters = [];
 global.game_width = 960
 global.game_height = 640
 display_set_gui_size(global.game_width, global.game_height);
-global.saveload_disabled = true;
+global.saveload_disabled = false;
 
 global.game_speed = 60;
 game_set_speed(global.game_speed, gamespeed_fps);

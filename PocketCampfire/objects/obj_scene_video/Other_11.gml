@@ -1,16 +1,6 @@
 /// @description Start New Video
 
 // --------------------------------------------------
-// PHASE 3+ IS NOT A VIDEO PHASE
-// --------------------------------------------------
-if(current_phase >= 3)
-{
-    video_open_pending = false;
-    return;
-}
-
-
-// --------------------------------------------------
 // A VIDEO IS ALREADY BEING OPENED
 // --------------------------------------------------
 if(video_open_pending)
@@ -48,6 +38,19 @@ if(video_get_status() != video_status_closed)
 // GET VIDEO PATH
 // --------------------------------------------------
 var _mode = scene_modes[mode];
+
+// A mode with fewer than 5 phases has no clip for the cum/afterglow
+// phases (3 and 4). Log it instead of crashing on an out-of-range index.
+if(current_phase >= array_length(_mode.clips))
+{
+    show_debug_message(
+        "ERROR: mode \"" + _mode.name + "\" has no clip for phase " + string(current_phase)
+    );
+
+    video_open_pending = false;
+    return;
+}
+
 var _clip = _mode.clips[current_phase];
 
 show_debug_message(

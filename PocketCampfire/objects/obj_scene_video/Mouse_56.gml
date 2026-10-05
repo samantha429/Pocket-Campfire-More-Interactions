@@ -76,23 +76,12 @@ else
         fade_dir = 1;
         target_phase = phase_button;
     }
-	else
-	{
-	    // Cum / end phase
-	    current_phase = 3;
-	    video_last_position = -100;
-
-	    // Do NOT attempt to open another video.
-	    // The current video must be closed first.
-	    if (video_get_status() != video_status_closed)
-	    {
-	        video_close();
-	    }
-
-	    video_close_pending = false;
-	    video_open_pending = false;
-
-	    // Continue to the end/refraction sequence
-	    event_user(3);
-	}
+    else
+    {
+        // Finish: phase 3 is the cum clip. The swap handler closes the
+        // current video and opens clips[3], so don't touch the player here.
+        current_phase = 3;
+        video_last_position = -100;
+        event_user(3);
+    }
 }
