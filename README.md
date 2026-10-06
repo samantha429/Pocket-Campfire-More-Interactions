@@ -11,6 +11,7 @@ This mods seeks to revamp how you can interact with your mons.
 - More global sex scenes
    - Anal
    - Paw Job
+   - Butt Job
 - Mon specific scenes
    - Alolan Vulpix: Full body
    - Braixen (fem): Breastfeeding handjob
