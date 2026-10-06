@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_character_lookup",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_character_lookup",
+  "parent":{
+    "name":"Getters",
+    "path":"folders/Scripts/Getters.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -31,20 +31,12 @@ gender_string = gender == GENDERS.M ? "m" : "f";
 // CHARACTER LOOKUP
 // --------------------------------------------------
 
-char_data = noone;
+char_data = GetCharacterForSpecies(mon_species);
 
-for(var _i = 0; _i < array_length(global.characters); _i++)
+if(is_undefined(char_data))
 {
-	if(global.characters[_i].key == mon_name_file)
-	{
-		char_data = global.characters[_i];
-		break;
-	}
-}
-
-if(char_data == noone)
-{
-	show_debug_message("obj_scene_video: no character data found for \"" + mon_name_file + "\" — scene cannot load modes.");
+	char_data = noone;
+	show_debug_message("obj_scene_video: no character data found for species \"" + string(mon_species) + "\" — scene cannot load modes.");
 }
 
 // --------------------------------------------------
@@ -76,23 +68,24 @@ scene_modes = [];
 if(char_data != noone)
 {
 	show_debug_message("==================================");
-	show_debug_message("Loading character: " + mon_name_file);
+	show_debug_message("Loading character: " + char_data.key);
 
 	for(var _i = 0; _i < array_length(char_data.scene_mode_defs); _i++)
 	{
 		var _def = char_data.scene_mode_defs[_i];
 		var _clips = array_create(_def.phases);
+		var _clip_base = char_data.folder_path + char_data.key + "_" + _def.prefix + "_";
 
 		for(var _p = 0; _p < _def.phases; _p++)
 		{
-			var _clip = char_data.folder_path + mon_name_file + "_" + _def.prefix + "_" + gender_string + "_" + string(_p + 1) + ".mp4";
+			var _clip = _clip_base + gender_string + "_" + string(_p + 1) + ".mp4";
 
 			show_debug_message("Trying: " + _clip);
 
 			if(!file_exists(_clip))
 			{
 				show_debug_message("Missing, trying gender-neutral...");
-				_clip = char_data.folder_path + mon_name_file + "_" + _def.prefix + "_" + string(_p + 1) + ".mp4";
+				_clip = _clip_base + string(_p + 1) + ".mp4";
 			}
 
 			show_debug_message("Exists = " + string(file_exists(_clip)));

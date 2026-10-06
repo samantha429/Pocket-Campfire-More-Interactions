@@ -34,3 +34,12 @@ sex
 [phases]
 5
 [end mode]
+
+[mode]
+[name]
+Anal
+[prefix]
+anal
+[phases]
+5
+[end mode]
