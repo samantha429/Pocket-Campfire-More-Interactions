@@ -1,258 +1,258 @@
-function SceneMode(_name, _icon_sprite, _clips)
-{
-	return {
-		name : _name,
-		icon_sprite : _icon_sprite,
-		clips : _clips
-	};
-}
-
-mon_species = global.active_mon[? "species"];
-
-lut_sampler = shader_get_sampler_index(sh_lut, "s_Lut");
-
-// State Variables
-finished = false;
-locked = false;
-
-mode = 0;
-target_mode = 0;
-target_phase = 0;
-current_phase = 0;
-
-// Video Reference Obtaining & Variables
-mon_name = global.active_mon[? "name"];
-mon_name_file = string_replace_all(string_lower(mon_name), " ", "");
-
-gender = global.active_mon[? "gender"];
-gender_string = gender == GENDERS.M ? "m" : "f";
-
-// --------------------------------------------------
-// CHARACTER LOOKUP
-// --------------------------------------------------
-
-char_data = GetCharacterForSpecies(mon_species);
-
-if(is_undefined(char_data))
-{
-	char_data = noone;
-	show_debug_message("obj_scene_video: no character data found for species \"" + string(mon_species) + "\" — scene cannot load modes.");
-}
-
-// --------------------------------------------------
-// LUT TEXTURE
-// --------------------------------------------------
-
-if(is_string(mon_species))
-{
-	// Modded character: load their own LUT at runtime, falling back
-	// to the base game's neutral LUT if they didn't supply one.
-	var _lut_path = (char_data != noone) ? char_data.folder_path + "lut.png" : "";
-	var _lut_sprite = (_lut_path != "" && file_exists(_lut_path))
-		? sprite_add(_lut_path, 1, false, false, 0, 0)
-		: spr_scene_lut;
-	lut_texture = sprite_get_texture(_lut_sprite, 0);
-}
-else
-{
-	// Built-in species: shared strip sprite, one frame per species.
-	lut_texture = sprite_get_texture(spr_scene_lut, mon_species + 1);
-}
-
-// --------------------------------------------------
-// MODE DATA
-// --------------------------------------------------
-
-scene_modes = [];
-
-if(char_data != noone)
-{
-	show_debug_message("==================================");
-	show_debug_message("Loading character: " + char_data.key);
-
-	for(var _i = 0; _i < array_length(char_data.scene_mode_defs); _i++)
+	function SceneMode(_name, _icon_sprite, _clips)
 	{
-		var _def = char_data.scene_mode_defs[_i];
-		var _clips = array_create(_def.phases);
-		var _clip_base = char_data.folder_path + char_data.key + "_" + _def.prefix + "_";
-
-		for(var _p = 0; _p < _def.phases; _p++)
-		{
-			var _clip = _clip_base + gender_string + "_" + string(_p + 1) + ".mp4";
-
-			show_debug_message("Trying: " + _clip);
-
-			if(!file_exists(_clip))
-			{
-				show_debug_message("Missing, trying gender-neutral...");
-				_clip = _clip_base + string(_p + 1) + ".mp4";
-			}
-
-			show_debug_message("Exists = " + string(file_exists(_clip)));
-
-			_clips[_p] = file_exists(_clip) ? _clip : "INVALID";
-		}
-
-		scene_modes[_i] = SceneMode(_def.name, GetModeIcon(_def.name, char_data, _def), _clips);
+		return {
+			name : _name,
+			icon_sprite : _icon_sprite,
+			clips : _clips
+		};
 	}
-}
 
-mode_count = array_length(scene_modes);
+	mon_species = global.active_mon[? "species"];
 
-mode_button_count = 3; // Oral, Sex, Cycle — fixed regardless of total modes
+	lut_sampler = shader_get_sampler_index(sh_lut, "s_Lut");
 
-oral_mode_index = -1;
-sex_mode_index = -1;
-cycle_mode_indices = [];
-cycle_position = -1;
+	// State Variables
+	finished = false;
+	locked = false;
 
-for(var _i = 0; _i < array_length(scene_modes); _i++)
-{
-	var _mode_name = scene_modes[_i].name;
+	mode = 0;
+	target_mode = 0;
+	target_phase = 0;
+	current_phase = 0;
 
-	if(_mode_name == "Oral")
+	// Video Reference Obtaining & Variables
+	mon_name = global.active_mon[? "name"];
+	mon_name_file = string_replace_all(string_lower(mon_name), " ", "");
+
+	gender = global.active_mon[? "gender"];
+	gender_string = gender == GENDERS.M ? "m" : "f";
+
+	// --------------------------------------------------
+	// CHARACTER LOOKUP
+	// --------------------------------------------------
+
+	char_data = GetCharacterForSpecies(mon_species);
+
+	if(is_undefined(char_data))
 	{
-		oral_mode_index = _i;
+		char_data = noone;
+		show_debug_message("obj_scene_video: no character data found for species \"" + string(mon_species) + "\" — scene cannot load modes.");
 	}
-	else if(_mode_name == "Sex")
+
+	// --------------------------------------------------
+	// LUT TEXTURE
+	// --------------------------------------------------
+
+	if(is_string(mon_species))
 	{
-		sex_mode_index = _i;
+		// Modded character: load their own LUT at runtime, falling back
+		// to the base game's neutral LUT if they didn't supply one.
+		var _lut_path = (char_data != noone) ? char_data.folder_path + "lut.png" : "";
+		var _lut_sprite = (_lut_path != "" && file_exists(_lut_path))
+			? sprite_add(_lut_path, 1, false, false, 0, 0)
+			: spr_scene_lut;
+		lut_texture = sprite_get_texture(_lut_sprite, 0);
 	}
 	else
 	{
-		array_push(cycle_mode_indices, _i);
+		// Built-in species: shared strip sprite, one frame per species.
+		lut_texture = sprite_get_texture(spr_scene_lut, mon_species + 1);
 	}
-}
 
-// --------------------------------------------------
-// AUDIO
-// --------------------------------------------------
+	// --------------------------------------------------
+	// MODE DATA
+	// --------------------------------------------------
 
-voice_enabled = true;
+	scene_modes = [];
 
-with(obj_sound_manager)
-{
-	other.voice_enabled = human_voice_enabled;
-}
+	if(char_data != noone)
+	{
+		show_debug_message("==================================");
+		show_debug_message("Loading character: " + char_data.key);
 
-human_voiceclips =
-[
-	snd_human_1,
-	snd_human_2,
-	snd_human_3,
-	snd_human_4,
-	snd_human_5
-];
+		for(var _i = 0; _i < array_length(char_data.scene_mode_defs); _i++)
+		{
+			var _def = char_data.scene_mode_defs[_i];
+			var _clips = array_create(_def.phases);
+			var _clip_base = char_data.folder_path + char_data.key + "_" + _def.prefix + "_";
 
-human_voiceclips_muffled =
-[
-	snd_humanmuffled_1,
-	snd_humanmuffled_2,
-	snd_humanmuffled_3,
-	snd_humanmuffled_4,
-	snd_humanmuffled_5
-];
+			for(var _p = 0; _p < _def.phases; _p++)
+			{
+				var _clip = _clip_base + gender_string + "_" + string(_p + 1) + ".mp4";
 
-current_humanvoice = -1;
-ag_voice_gain = audio_group_get_gain(ag_voice);
+				show_debug_message("Trying: " + _clip);
 
-// --------------------------------------------------
-// VIDEO
-// --------------------------------------------------
+				if(!file_exists(_clip))
+				{
+					show_debug_message("Missing, trying gender-neutral...");
+					_clip = _clip_base + string(_p + 1) + ".mp4";
+				}
 
-video = noone;
+				show_debug_message("Exists = " + string(file_exists(_clip)));
 
-video_close_pending = false;
-video_open_pending = false;
-video_close_wait = false;
-video_last_position = -100;
+				_clips[_p] = file_exists(_clip) ? _clip : "INVALID";
+			}
 
-event_user(1);
+			scene_modes[_i] = SceneMode(_def.name, GetModeIcon(_def.name, char_data, _def), _clips);
+		}
+	}
 
-// --------------------------------------------------
-// PLEASURE BAR
-// --------------------------------------------------
+	mode_count = array_length(scene_modes);
 
-pleasure_bar = spr_scene_pleasurebar;
-pleasure_bar_progress = spr_scene_pleasurebar_progress;
+	mode_button_count = 3; // Oral, Sex, Cycle — fixed regardless of total modes
 
-pleasure_bar_width = sprite_get_width(pleasure_bar);
-pleasure_bar_height = sprite_get_height(pleasure_bar);
+	oral_mode_index = -1;
+	sex_mode_index = -1;
+	cycle_mode_indices = [];
+	cycle_position = -1;
 
-pleasure_bar_x = 10;
-pleasure_bar_y = global.game_height / 2 - pleasure_bar_height / 2;
+	for(var _i = 0; _i < array_length(scene_modes); _i++)
+	{
+		var _mode_name = scene_modes[_i].name;
 
-pleasure_bar_progress_padding_top = 10;
-pleasure_bar_progress_padding_bottom = 15;
+		if(_mode_name == "Oral")
+		{
+			oral_mode_index = _i;
+		}
+		else if(_mode_name == "Sex")
+		{
+			sex_mode_index = _i;
+		}
+		else
+		{
+			array_push(cycle_mode_indices, _i);
+		}
+	}
 
-pleasure_bar_trueheight =
-	pleasure_bar_height
-	- pleasure_bar_progress_padding_top
-	- pleasure_bar_progress_padding_bottom;
+	// --------------------------------------------------
+	// AUDIO
+	// --------------------------------------------------
 
-pleasure = 0;
-max_pleasure = 100;
+	voice_enabled = true;
 
-// --------------------------------------------------
-// CONTROL BUTTONS
-// --------------------------------------------------
+	with(obj_sound_manager)
+	{
+		other.voice_enabled = human_voice_enabled;
+	}
 
-button = spr_scene_controlbutton;
-button_selected = spr_scene_controlbutton_selected;
+	human_voiceclips =
+	[
+		snd_human_1,
+		snd_human_2,
+		snd_human_3,
+		snd_human_4,
+		snd_human_5
+	];
 
-button_count = mode_button_count + 4;
+	human_voiceclips_muffled =
+	[
+		snd_humanmuffled_1,
+		snd_humanmuffled_2,
+		snd_humanmuffled_3,
+		snd_humanmuffled_4,
+		snd_humanmuffled_5
+	];
 
-button_width = sprite_get_width(button);
-button_height = sprite_get_height(button);
+	current_humanvoice = -1;
+	ag_voice_gain = audio_group_get_gain(ag_voice);
 
-button_margin_x = 10;
-button_margin_y = 3;
+	// --------------------------------------------------
+	// VIDEO
+	// --------------------------------------------------
 
-button_modebutton_gap = 20;
+	video = noone;
 
-button_x = global.game_width - button_margin_x;
+	video_close_pending = false;
+	video_open_pending = false;
+	video_close_wait = false;
+	video_last_position = -100;
 
-button_y =
-	global.game_height / 2
-	- (button_count * (button_height + button_margin_y * 2)
-	+ button_modebutton_gap) / 2;
+	event_user(1);
 
-button_trueheight = button_height + (button_margin_y * 2);
+	// --------------------------------------------------
+	// PLEASURE BAR
+	// --------------------------------------------------
 
-selected_button = -1;
+	pleasure_bar = spr_scene_pleasurebar;
+	pleasure_bar_progress = spr_scene_pleasurebar_progress;
 
-// --------------------------------------------------
-// MENU BUTTONS
-// --------------------------------------------------
+	pleasure_bar_width = sprite_get_width(pleasure_bar);
+	pleasure_bar_height = sprite_get_height(pleasure_bar);
 
-menubutton = spr_scene_menubuttons;
+	pleasure_bar_x = 10;
+	pleasure_bar_y = global.game_height / 2 - pleasure_bar_height / 2;
 
-menubutton_count = 3;
+	pleasure_bar_progress_padding_top = 10;
+	pleasure_bar_progress_padding_bottom = 15;
 
-menubutton_width = sprite_get_width(menubutton);
-menubutton_height = sprite_get_height(menubutton);
+	pleasure_bar_trueheight =
+		pleasure_bar_height
+		- pleasure_bar_progress_padding_top
+		- pleasure_bar_progress_padding_bottom;
 
-menubutton_margin_x = 10;
-menubutton_margin_y = 10;
+	pleasure = 0;
+	max_pleasure = 100;
 
-menubutton_x = menubutton_margin_x;
-menubutton_y = global.game_height - menubutton_margin_y;
+	// --------------------------------------------------
+	// CONTROL BUTTONS
+	// --------------------------------------------------
 
-menubutton_gap = 10;
+	button = spr_scene_controlbutton;
+	button_selected = spr_scene_controlbutton_selected;
 
-selected_menubutton = -1;
+	button_count = mode_button_count + 4;
 
-// --------------------------------------------------
-// FADING
-// --------------------------------------------------
+	button_width = sprite_get_width(button);
+	button_height = sprite_get_height(button);
 
-fade_time = 0.1;
+	button_margin_x = 10;
+	button_margin_y = 3;
 
-fading = false;
-fade_dir = 0;
-fade_a = 0;
+	button_modebutton_gap = 20;
 
-with(obj_sound_manager)
-{
-	event_user(0);
-}
+	button_x = global.game_width - button_margin_x;
+
+	button_y =
+		global.game_height / 2
+		- (button_count * (button_height + button_margin_y * 2)
+		+ button_modebutton_gap) / 2;
+
+	button_trueheight = button_height + (button_margin_y * 2);
+
+	selected_button = -1;
+
+	// --------------------------------------------------
+	// MENU BUTTONS
+	// --------------------------------------------------
+
+	menubutton = spr_scene_menubuttons;
+
+	menubutton_count = 3;
+
+	menubutton_width = sprite_get_width(menubutton);
+	menubutton_height = sprite_get_height(menubutton);
+
+	menubutton_margin_x = 10;
+	menubutton_margin_y = 10;
+
+	menubutton_x = menubutton_margin_x;
+	menubutton_y = global.game_height - menubutton_margin_y;
+
+	menubutton_gap = 10;
+
+	selected_menubutton = -1;
+
+	// --------------------------------------------------
+	// FADING
+	// --------------------------------------------------
+
+	fade_time = 0.1;
+
+	fading = false;
+	fade_dir = 0;
+	fade_a = 0;
+
+	with(obj_sound_manager)
+	{
+		event_user(0);
+	}
