@@ -17,10 +17,10 @@ This mods seeks to revamp how you can interact with your mons.
    - Braixen (fem): Breastfeeding handjob
    - Braixen (male): Mutual handjob
    - Cinderace: Nipple play reverse cowgirl
-   - Lucario: Ass job
+   - Lucario: Thighjob
    - Nickit: Footjob
    - Vulpix: Upside down full body
-   - Zoroark (fem): Blowjob boobjob
+   - Zoroark (fem): Blowjob boobjob 
    - Zoroark (male): 69
 ### Mod support
 - Allow modders to create their own sex scenes, "Show Off" options (WIP), "Intimacy" options (WIP), etc (WIP)...
