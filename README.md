@@ -26,10 +26,10 @@ This mods seeks to revamp how you can interact with your mons.
 - Allow modders to create their own sex scenes, "Show Off" options (WIP), "Intimacy" options (WIP), etc (WIP)...
 - Allow modders to create their own mons. (WIP)
 ## Current Progress:
-- More sex scenes: 52%
-- Global sex scenes: 60%
+- More sex scenes: 55%
+- Global sex scenes: 70%
 - Mon specific scenes: 50%
-- Modding support: 55%
+- Modding support: 60%
 - "Show Off" options: 0%
 - Cuddle: 0%
 - "Intimacy" options: 0%
