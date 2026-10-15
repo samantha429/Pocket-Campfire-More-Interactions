@@ -1,4 +1,4 @@
-/// @description Insert description here
+/// @obj_interaction_sprite
 
 enum SPRITE_MODES	// This enum corresponds to the index layout of sprites 
 {
@@ -44,8 +44,8 @@ mon_gender = global.active_mon[? "gender"];
 
 sprite = scr_get_mon_sprite(mon_species, mon_gender)
 
-mon_height = global.mon_height[? mon_species];
-mon_scale = global.mon_scale[? mon_species];
+mon_height = GetMonHeight(mon_species);
+mon_scale = GetMonScale(mon_species);
 
 mode = 0;
 

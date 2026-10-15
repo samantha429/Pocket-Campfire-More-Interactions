@@ -11,9 +11,12 @@ function CharacterData(_key)
 		menu_offset          : 0,
 		berries              : [],
 		genders              : "mf",
+		rarity               : undefined,
 
 		scene_mode_defs      : [],
-		raw_parsed           : undefined
+		raw_parsed           : undefined,
+		loaded_sprites       : {},
+		loaded_sounds        : {}
 	};
 }
 
@@ -45,6 +48,7 @@ function LoadCharacterFolder(_key, _folder)
 		if(variable_struct_exists(_vars, "menu offset"))   _char.menu_offset  = real(_vars[$ "menu offset"]);
 		if(variable_struct_exists(_vars, "gender"))        _char.genders      = _vars.gender;
 		if(variable_struct_exists(_vars, "berries"))       _char.berries      = _vars.berries;
+		if(variable_struct_exists(_vars, "rarity"))        _char.rarity       = real(_vars.rarity);
 	}
 
 	if(variable_struct_exists(_parsed, "Scene Modes"))
@@ -62,6 +66,14 @@ function LoadCharacterFolder(_key, _folder)
 				icon   : variable_struct_exists(_mode_val, "icon")   ? _mode_val.icon   : ""
 			});
 		}
+	}
+
+	// Mods made for the old system have no [[Scene Modes:]] section.
+	// The old system always had Oral and Sex, so default to those.
+	if(array_length(_char.scene_mode_defs) == 0)
+	{
+		array_push(_char.scene_mode_defs, { name : "Oral", prefix : "oral", phases : 5, icon : "" });
+		array_push(_char.scene_mode_defs, { name : "Sex",  prefix : "sex",  phases : 5, icon : "" });
 	}
 
 	return _char;

@@ -85,20 +85,21 @@ ds_map_add(global.mon_scale, SPECIES.CINDERACE, 1.05);
 ds_map_add(global.mon_scale, SPECIES.BRAIXEN, 1.1);
 ds_map_add(global.mon_scale, SPECIES.ZOROARK, 1.05);
 
-global.interact_bg_height = ds_map_create();
+GetMonBgHeight = ds_map_create();
 
-ds_map_add(global.interact_bg_height, SPECIES.NICKIT, 0);
-ds_map_add(global.interact_bg_height, SPECIES.VULPIX, 0);
-ds_map_add(global.interact_bg_height, SPECIES.ALOLANVULPIX, 0);
-ds_map_add(global.interact_bg_height, SPECIES.LUCARIO, 0.6);
-ds_map_add(global.interact_bg_height, SPECIES.CINDERACE, 0.65);
-ds_map_add(global.interact_bg_height, SPECIES.BRAIXEN, 0.5);
-ds_map_add(global.interact_bg_height, SPECIES.ZOROARK, 0.6);
+ds_map_add(GetMonBgHeight, SPECIES.NICKIT, 0);
+ds_map_add(GetMonBgHeight, SPECIES.VULPIX, 0);
+ds_map_add(GetMonBgHeight, SPECIES.ALOLANVULPIX, 0);
+ds_map_add(GetMonBgHeight, SPECIES.LUCARIO, 0.6);
+ds_map_add(GetMonBgHeight, SPECIES.CINDERACE, 0.65);
+ds_map_add(GetMonBgHeight, SPECIES.BRAIXEN, 0.5);
+ds_map_add(GetMonBgHeight, SPECIES.ZOROARK, 0.6);
 
 #endregion
 
 // Global game variables
 global.characters = [];
+global.orphaned_mons = [];
 global.game_width = 960
 global.game_height = 640
 display_set_gui_size(global.game_width, global.game_height);
@@ -141,3 +142,9 @@ for(var _i = 0; _i < array_length(global.characters); _i++)
 	var _c = global.characters[_i];
 	show_debug_message("  - " + _c.key + ": " + string(array_length(_c.scene_mode_defs)) + " mode(s)");
 }
+
+
+// TEMPORARY - cry diagnostics
+var _cry = GetModdedCry("mew", MON_CRIES.NEUTRAL);
+show_debug_message("mew cry stream: " + string(_cry));
+show_debug_message("cry group gain: " + string(audio_group_get_gain(audio_sound_get_audio_group(snd_zoroark_default))));

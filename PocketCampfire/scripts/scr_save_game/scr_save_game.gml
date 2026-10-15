@@ -30,6 +30,22 @@ function scr_save_game()
 
 		ds_map_copy(_map, _source_map);
 	}
+	
+	// Mons from characters that aren't installed right now are kept as they were
+	for(var _o = 0; _o < array_length(global.orphaned_mons); _o++)
+	{
+		var _orphan = global.orphaned_mons[_o];
+		var _orphan_map = ds_map_create();
+		ds_list_add(_mon_list, _orphan_map);
+		ds_list_mark_as_map(_mon_list, ds_list_size(_mon_list) - 1);
+
+		ds_map_add(_orphan_map, "species", _orphan.species);
+		ds_map_add(_orphan_map, "gender", _orphan.gender);
+		ds_map_add(_orphan_map, "affection", _orphan.affection);
+		ds_map_add(_orphan_map, "arousal", _orphan.arousal);
+		ds_map_add(_orphan_map, "location x", _orphan.location_x);
+		ds_map_add(_orphan_map, "location y", _orphan.location_y);
+	}
 
 	for(var _j = 0; _j < global.inventory_slots; _j++)
 	{

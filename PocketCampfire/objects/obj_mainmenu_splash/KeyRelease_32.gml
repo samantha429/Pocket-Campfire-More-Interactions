@@ -33,11 +33,11 @@ else
 }
 
 mon_name = scr_get_species_name(mon_species);
-mon_height = global.mon_height[? mon_species];
+mon_height = GetMonHeight(mon_species);
 mon_height *= 0.3; // Reduce offset for smaller mons
 
-mon_scale = global.mon_scale[? mon_species];
-mon_bgheight = global.interact_bg_height[? mon_species];
+mon_scale = GetMonScale(mon_species);
+mon_bgheight = GetMonBgHeight(mon_species);
 //bg_sprite_y_offset = lerp((bg_sprite_height - global.game_height) * -1, 0, mon_bgheight);
 
 gender_text = mon_gender == GENDERS.M ? "m" : "f";

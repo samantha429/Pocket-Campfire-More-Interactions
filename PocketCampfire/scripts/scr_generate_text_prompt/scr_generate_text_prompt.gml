@@ -31,8 +31,16 @@ function scr_generate_text_prompt(_type, _name)
 	var _mon_count = ds_list_size(global.ds_mon);
 	
 	var _lines = [];
-	
-	switch(_type)
+		// Modded characters read their lines from their own .txt file.
+	// (Cooking text isn't species-specific, so it keeps the built-in lines.)
+	var _is_modded = is_string(_species) && _type != TEXT_PROMPT_TYPE.COOKING_SEQUENCE;
+
+	if(_is_modded)
+	{
+		_lines = GetModdedPromptLines(_species, _type, _affection_level, _arousal_level, _gender, _mon_count);
+	}
+
+	switch(_is_modded ? -1 : _type)
 	{
 		case TEXT_PROMPT_TYPE.CHAT:
 			switch(_affection_level)
@@ -2626,6 +2634,8 @@ function scr_generate_text_prompt(_type, _name)
 	var _possesive_l = string_lower(_possesive);
 	
 	_line = string_replace_all(_line, "NAME", _name);
+	
+	if(is_string(_species)) { _line = string_replace_all(_line, "SPECIES", _name); }
 	
 	_line = string_replace_all(_line, "HE_SHE_L", _subject_l);
 	_line = string_replace_all(_line, "HIM_HER_L", _object_l);

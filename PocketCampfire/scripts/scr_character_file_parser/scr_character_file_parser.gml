@@ -111,51 +111,6 @@ function CFP_ResolveBlock(_items, _explicit_close)
 	return _items;
 }
 
-function CFP_ParseTagValue(_lines, _pos, _tag_name)
-{
-	var _is_gender_scope = CFP_IsGenderKeyword(_tag_name);
-	var _items = [];
-	var _explicit_close = false;
-
-	while(true)
-	{
-		var _peek = CFP_Peek(_lines, _pos);
-
-		if(_peek.type == "eof" || _peek.type == "section") { break; }
-
-		if(_peek.type == "close")
-		{
-			if(_peek.name == _tag_name)
-			{
-				CFP_Next(_lines, _pos);
-				_explicit_close = true;
-			}
-			break; // ours, or an ancestor's — either way, stop here
-		}
-
-		if(_peek.type == "open")
-		{
-			// male/female/nongendered implicitly close each other.
-			if(_is_gender_scope && CFP_IsGenderKeyword(_peek.name)) { break; }
-
-			// A single line collected with no [end] seen yet means
-			// this tag was actually a scalar — the new tag belongs
-			// to whoever contains us.
-			if(!_explicit_close && array_length(_items) == 1 && is_string(_items[0])) { break; }
-
-			CFP_Next(_lines, _pos);
-			var _child_value = CFP_ParseTagValue(_lines, _pos, _peek.name);
-			array_push(_items, { tag : _peek.name, value : _child_value });
-			continue;
-		}
-
-		array_push(_items, _peek.value);
-		CFP_Next(_lines, _pos);
-	}
-
-	return CFP_ResolveBlock(_items, _explicit_close);
-}
-
 function ParseCharacterFile(_path)
 {
 	if(!file_exists(_path))
@@ -169,7 +124,17 @@ function ParseCharacterFile(_path)
 	buffer_delete(_buffer);
 
 	var _lines = CFP_Tokenize(_text);
-	var _pos = { i : 0 };
+
+	// Any tag with an explicit [end <name>] somewhere in the file is a
+	// container block. Collect those names up front.
+	var _closed = {};
+	for(var _i = 0; _i < array_length(_lines); _i++)
+	{
+		var _t = CFP_LineType(_lines[_i]);
+		if(_t.type == "close") { _closed[$ _t.name] = true; }
+	}
+
+	var _pos = { i : 0, closed : _closed };
 	var _root = {};
 
 	while(_pos.i < array_length(_lines))
@@ -189,6 +154,60 @@ function ParseCharacterFile(_path)
 	}
 
 	return _root;
+}
+
+function CFP_ParseTagValue(_lines, _pos, _tag_name)
+{
+	var _is_gender_scope = CFP_IsGenderKeyword(_tag_name);
+	var _is_container = variable_struct_exists(_pos.closed, _tag_name);
+	var _items = [];
+	var _explicit_close = false;
+
+	while(true)
+	{
+		var _peek = CFP_Peek(_lines, _pos);
+
+		if(_peek.type == "eof" || _peek.type == "section") { break; }
+
+		if(_peek.type == "close")
+		{
+			if(_peek.name == _tag_name)
+			{
+				CFP_Next(_lines, _pos);
+				_explicit_close = true;
+			}
+			break;
+		}
+
+		if(_peek.type == "open")
+		{
+			// male/female/nongendered end implicitly: at the next gender
+			// tag, or at any container block, which is never part of a
+			// gender tag's content.
+			if(_is_gender_scope && (CFP_IsGenderKeyword(_peek.name) || variable_struct_exists(_pos.closed, _peek.name))) { break; }
+
+			// One line followed by another tag means this tag was a plain
+			// value, unless it's a container, which ends at its [end].
+			if(!_explicit_close && !_is_container && array_length(_items) == 1 && is_string(_items[0])) { break; }
+
+			CFP_Next(_lines, _pos);
+			var _child_value = CFP_ParseTagValue(_lines, _pos, _peek.name);
+
+			// An empty gender tag carries no content, so leave it out.
+			var _is_empty = (is_string(_child_value) && _child_value == "")
+				|| (is_array(_child_value) && array_length(_child_value) == 0);
+
+			if(CFP_IsGenderKeyword(_peek.name) && _is_empty) { continue; }
+
+			array_push(_items, { tag : _peek.name, value : _child_value });
+			continue;
+		}
+
+		array_push(_items, _peek.value);
+		CFP_Next(_lines, _pos);
+	}
+
+	return CFP_ResolveBlock(_items, _explicit_close);
 }
 
 function CFP_ExtractRepeated(_parsed_value, _tag_name)

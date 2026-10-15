@@ -53,3 +53,34 @@ function GetSpawnableSpecies()
 	}
 	return _out;
 }
+
+// Placement stats: built-ins keep the hard-coded maps, modded characters use their .txt values.
+function GetMonHeight(_species)
+{
+	if(is_string(_species))
+	{
+		var _c = GetCharacterForSpecies(_species);
+		return is_undefined(_c) ? 0 : _c.mon_height;
+	}
+	return GetMonHeight(_species);
+}
+
+function GetMonScale(_species)
+{
+	if(is_string(_species))
+	{
+		var _c = GetCharacterForSpecies(_species);
+		return is_undefined(_c) ? 1 : _c.mon_scale;
+	}
+	return GetMonScale(_species);
+}
+
+function GetMonBgHeight(_species)
+{
+	if(is_string(_species))
+	{
+		var _c = GetCharacterForSpecies(_species);
+		return is_undefined(_c) ? 0 : _c.bg_height;
+	}
+	return global.interact_bg_height[? _species];
+}

@@ -8,6 +8,10 @@ function scr_load_game_data()
 		return;
 	}
 	
+	// Make sure the character list exists before any mon is created
+	if(!variable_global_exists("characters") || array_length(global.characters) == 0) { LoadCharacters(); }
+	global.orphaned_mons = [];
+	
 	if(file_exists("savefile.sav"))
 	{
 		var _buffer = buffer_load("savefile.sav");
@@ -39,7 +43,18 @@ function scr_load_game_data()
 			var _arousal = _map[? "arousal"];
 			var _location_x = _map[? "location x"];
 			var _location_y = _map[? "location y"];
-		
+			
+			// A mon from a character that isn't installed: set it aside instead of loading it
+			if(is_string(_species_id) && is_undefined(GetCharacterByKey(_species_id)))
+			{
+				show_debug_message("scr_load_game_data: \"" + _species_id + "\" isn't installed, keeping its mon aside.");
+				array_push(global.orphaned_mons, {
+					species : _species_id, gender : _gender, affection : _affection,
+					arousal : _arousal, location_x : _location_x, location_y : _location_y
+				});
+				continue;
+			}
+			
 			scr_create_mon_ext(_species_id, _gender, _affection, _hunger, _arousal, _location_x, _location_y);
 		}
 
