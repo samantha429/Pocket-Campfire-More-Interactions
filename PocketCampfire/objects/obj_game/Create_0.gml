@@ -85,15 +85,15 @@ ds_map_add(global.mon_scale, SPECIES.CINDERACE, 1.05);
 ds_map_add(global.mon_scale, SPECIES.BRAIXEN, 1.1);
 ds_map_add(global.mon_scale, SPECIES.ZOROARK, 1.05);
 
-GetMonBgHeight = ds_map_create();
+global.interact_bg_height = ds_map_create();
 
-ds_map_add(GetMonBgHeight, SPECIES.NICKIT, 0);
-ds_map_add(GetMonBgHeight, SPECIES.VULPIX, 0);
-ds_map_add(GetMonBgHeight, SPECIES.ALOLANVULPIX, 0);
-ds_map_add(GetMonBgHeight, SPECIES.LUCARIO, 0.6);
-ds_map_add(GetMonBgHeight, SPECIES.CINDERACE, 0.65);
-ds_map_add(GetMonBgHeight, SPECIES.BRAIXEN, 0.5);
-ds_map_add(GetMonBgHeight, SPECIES.ZOROARK, 0.6);
+ds_map_add(global.interact_bg_height, SPECIES.NICKIT, 0);
+ds_map_add(global.interact_bg_height, SPECIES.VULPIX, 0);
+ds_map_add(global.interact_bg_height, SPECIES.ALOLANVULPIX, 0);
+ds_map_add(global.interact_bg_height, SPECIES.LUCARIO, 0.6);
+ds_map_add(global.interact_bg_height, SPECIES.CINDERACE, 0.65);
+ds_map_add(global.interact_bg_height, SPECIES.BRAIXEN, 0.5);
+ds_map_add(global.interact_bg_height, SPECIES.ZOROARK, 0.6);
 
 #endregion
 

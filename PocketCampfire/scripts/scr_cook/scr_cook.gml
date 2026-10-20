@@ -21,7 +21,7 @@ function scr_cook(_ingredients)
 	var _female = 1;
 	
 	var _encounter_affection = 0;
-	var _guarantied_species = -1;  // Enigma berry, species are in alphabetical order
+	var _guarantied_species = undefined;  // Enigma berry (MODDED: undefined instead of -1, since a species can now be a string)
 	var _swap_genders = false;
 	
 	_arousal =  lerp(8, 30, _ingredient_count / _ingredient_slot_count);
@@ -85,11 +85,51 @@ function scr_cook(_ingredients)
 					case 4: _guarantied_species = SPECIES.NICKIT; break;
 					case 5: _guarantied_species = SPECIES.VULPIX; break;
 					case 6: _guarantied_species = SPECIES.ZOROARK; break;
-					case 7: _guarantied_species = irandom_range(0, SPECIES.ZOROARK); break;
+					case 7:
+					{
+						// MODDED: the random slot now picks from every character that can appear
+						var _spawnable = GetSpawnableSpecies();
+						_guarantied_species = _spawnable[irandom(array_length(_spawnable) - 1)];
+						break;
+					}
 				}
 				break;
 		}
 	}
+	
+	// MODDED: modded characters get 1 base point, +1 for each ingredient that is one of their berries
+	var _modded_pool = [];
+
+	for(var _c = 0; _c < array_length(global.characters); _c++)
+	{
+		var _char = global.characters[_c];
+		var _char_species = GetSpeciesFromKey(_char.key);
+
+		if(!is_string(_char_species)) { continue; }   // built-in species are scored above
+
+		// [rarity] = percent chance this character is in the pool this time
+		if(!is_undefined(_char.rarity) && irandom_range(1, 100) > _char.rarity) { continue; }
+
+		var _char_points = 1;
+
+		for(var _k = 0; _k < _ingredient_slot_count; _k++)
+		{
+			if(_ingredients[_k] == 0) { continue; }
+
+			var _berry_name = GetBerryName(_ingredients[_k]);
+			if(_berry_name != "" && CharacterLikesBerry(_char, _berry_name)) { _char_points++; }
+		}
+
+		array_push(_modded_pool, { species : _char_species, points : _char_points });
+	}
+
+	// TEMPORARY - shows who made it into the pool this time
+	var _pool_text = "";
+	for(var _m = 0; _m < array_length(_modded_pool); _m++)
+	{
+		_pool_text += _modded_pool[_m].species + "(" + string(_modded_pool[_m].points) + ") ";
+	}
+	show_debug_message("scr_cook: modded pool: " + (_pool_text == "" ? "(none)" : _pool_text));
 	
 	// Apply effects to existing 'Mons
 	for(var _i = 0; _i < ds_list_size(global.ds_mon); _i++)
@@ -115,7 +155,11 @@ function scr_cook(_ingredients)
 	
 	// Determine if we have an encounter
 	_rating = clamp(_rating, 0, 100);
-	var _encounter_success = irandom_range(0, 100) <= _rating;
+
+	// TEMPORARY - hold Shift while cooking to force a Mew encounter
+	var _force_mew = keyboard_check(vk_shift) && !is_undefined(GetCharacterByKey("mew"));
+
+	var _encounter_success = irandom_range(0, 100) <= _rating || _force_mew;
 	
 	// If the encounter is a success, determine what species
 	
@@ -133,6 +177,12 @@ function scr_cook(_ingredients)
 			for(var _x = 0; _x < _points; _x++) array_push(_species_list, _i_species);
 		}
 		
+		// MODDED: modded characters join the list with the points worked out above
+		for(var _m = 0; _m < array_length(_modded_pool); _m++)
+		{
+			for(var _p = 0; _p < _modded_pool[_m].points; _p++) { array_push(_species_list, _modded_pool[_m].species); }
+		}
+		
 		// Try again on duplicate, scales with how many mon already obtained
 		var _retries = 1 + floor(ds_list_size(global.ds_mon) / 2.5);
 		var _found_duplicate = true;
@@ -144,9 +194,12 @@ function scr_cook(_ingredients)
 		while(_found_duplicate && _retries >= 0)
 		{
 			// Select a species and gender
-			_species = _guarantied_species > -1 ? 
+			_species = !is_undefined(_guarantied_species) ? 
 			_guarantied_species : 
 			_species_list[irandom_range(0, array_length(_species_list) - 1)];
+
+			// TEMPORARY - Shift forces Mew
+			if(_force_mew) { _species = "mew"; }
 				
 			_gender = random_range(0, _male + _female) > _male ? GENDERS.F : GENDERS.M;
 			
@@ -154,7 +207,8 @@ function scr_cook(_ingredients)
 			_found_duplicate = false;
 			for(var _i = 0; _i < array_length(_existing_mons); _i++)
 			{
-				if(_existing_mons[_i, 0] == _species && _existing_mons[_i, 1] == _gender)
+				// MODDED: SameSpecies, because a species can be a number or a string
+				if(SameSpecies(_existing_mons[_i, 0], _species) && _existing_mons[_i, 1] == _gender)
 				{
 					_found_duplicate = true;
 					break;
@@ -185,6 +239,9 @@ function scr_cook(_ingredients)
 	
 	var _target_room = _encounter_success ? rm_encounter : rm_camp;
 	scr_fade_scene(_target_room, 0.5, _fade_time);
+
+	// MODDED: the score map was never destroyed, so it leaked a little memory on every cook
+	ds_map_destroy(_ds_mon_scores);
 	
 	// Debug report for checking chances and results
 	/*

@@ -1,6 +1,13 @@
 // function scr_get_mon_sprite(species, gender)
 function scr_get_mon_sprite(argument0, argument1)
 {
+	// Modded characters are identified by a string key
+	if(is_string(argument0))
+	{
+		var _char = GetCharacterByKey(argument0);
+		return is_undefined(_char) ? noone : GetModdedInteractionSprite(_char, argument1);
+	}
+
 	switch(argument0)
 	{
 		case SPECIES.NICKIT:

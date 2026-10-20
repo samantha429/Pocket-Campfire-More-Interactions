@@ -47,7 +47,7 @@ function LoadCharacterFolder(_key, _folder)
 		if(variable_struct_exists(_vars, "bg height"))     _char.bg_height    = real(_vars[$ "bg height"]);
 		if(variable_struct_exists(_vars, "menu offset"))   _char.menu_offset  = real(_vars[$ "menu offset"]);
 		if(variable_struct_exists(_vars, "gender"))        _char.genders      = _vars.gender;
-		if(variable_struct_exists(_vars, "berries"))       _char.berries      = _vars.berries;
+		if(variable_struct_exists(_vars, "berries"))       _char.berries      = is_array(_vars.berries) ? _vars.berries : [_vars.berries];
 		if(variable_struct_exists(_vars, "rarity"))        _char.rarity       = real(_vars.rarity);
 	}
 
