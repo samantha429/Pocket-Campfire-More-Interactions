@@ -29,7 +29,7 @@ This mods seeks to revamp how you can interact with your mons.
 - More sex scenes: 55%
 - Global sex scenes: 70%
 - Mon specific scenes: 50%
-- Modding support: 75%
+- Modding support: 100%
 - "Show Off" options: 0%
 - Cuddle: 0%
 - "Intimacy" options: 0%
