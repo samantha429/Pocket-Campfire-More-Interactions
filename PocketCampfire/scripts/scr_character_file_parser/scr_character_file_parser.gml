@@ -181,10 +181,13 @@ function CFP_ParseTagValue(_lines, _pos, _tag_name)
 
 		if(_peek.type == "open")
 		{
-			// male/female/nongendered end implicitly: at the next gender
-			// tag, or at any container block, which is never part of a
-			// gender tag's content.
-			if(_is_gender_scope && (CFP_IsGenderKeyword(_peek.name) || variable_struct_exists(_pos.closed, _peek.name))) { break; }
+			// male/female/nongendered end implicitly: at the next gender tag,
+			// at a [group] entry, or at any container block, none of which
+			// is part of a gender tag's content.
+			if(_is_gender_scope && (CFP_IsGenderKeyword(_peek.name) || _peek.name == "group" || variable_struct_exists(_pos.closed, _peek.name))) { break; }
+
+			// A [group] entry is a number plus the lines after it; any other tag ends it
+			if(_tag_name == "group" && array_length(_items) > 0) { break; }
 
 			// One line followed by another tag means this tag was a plain
 			// value, unless it's a container, which ends at its [end].

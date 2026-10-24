@@ -31,16 +31,15 @@ function scr_generate_text_prompt(_type, _name)
 	var _mon_count = ds_list_size(global.ds_mon);
 	
 	var _lines = [];
-		// Modded characters read their lines from their own .txt file.
-	// (Cooking text isn't species-specific, so it keeps the built-in lines.)
+
+	// Modded characters get the shared generic lines plus their own.
+	var _modded_species = _species;
 	var _is_modded = is_string(_species) && _type != TEXT_PROMPT_TYPE.COOKING_SEQUENCE;
 
-	if(_is_modded)
-	{
-		_lines = GetModdedPromptLines(_species, _type, _affection_level, _arousal_level, _gender, _mon_count);
-	}
+	// With no species set, the built-in switch below adds only the generic lines
+	if(is_string(_species)) { _species = -1; }
 
-	switch(_is_modded ? -1 : _type)
+	switch(_type)
 	{
 		case TEXT_PROMPT_TYPE.CHAT:
 			switch(_affection_level)
@@ -2588,6 +2587,18 @@ function scr_generate_text_prompt(_type, _name)
 				}
 			}
 		break;	
+	}
+	
+		_species = _modded_species;
+
+	if(_is_modded)
+	{
+		var _mod_lines = GetModdedPromptLines(_species, _type, _affection_level, _arousal_level, _gender, _mon_count);
+
+		for(var _m = 0; _m < array_length(_mod_lines); _m++)
+		{
+			array_push(_lines, _mod_lines[_m]);
+		}
 	}
 	
 	// Cancel if no lines were found

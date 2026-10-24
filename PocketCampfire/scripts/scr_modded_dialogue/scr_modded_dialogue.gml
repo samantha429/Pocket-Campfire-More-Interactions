@@ -150,8 +150,6 @@ function GetModdedPromptLines(_species, _type, _affection_level, _arousal_level,
 		}
 	}
 
-	if(array_length(_lines) == 0) { _lines = GetFallbackPromptLines(_type); }
-
 	// Files store line breaks as the two characters \n
 	for(var _i = 0; _i < array_length(_lines); _i++)
 	{

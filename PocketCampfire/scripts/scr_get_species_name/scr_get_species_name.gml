@@ -1,5 +1,12 @@
 function scr_get_species_name(argument0)
 {
+	// Modded characters are identified by a string key
+	if(is_string(argument0))
+	{
+		var _char = GetCharacterByKey(argument0);
+		return is_undefined(_char) ? "" : _char.display_name;
+	}
+
 	switch(argument0)
 	{
 		case SPECIES.NICKIT:
